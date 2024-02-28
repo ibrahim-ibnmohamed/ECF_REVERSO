@@ -9,18 +9,13 @@ import model.entite.Prospect;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 public class Main {
     public Main() throws SQLException, IOException {
@@ -84,11 +79,11 @@ public class Main {
 
 
         DaoClient daoClient = new DaoClient();
-        System.out.println(DaoClient.ClientFindAll());
-        System.out.println(DaoClient.ClientFindByName("ibraTech"));
+        System.out.println(DaoClient.findAll());
+        System.out.println(DaoClient.findByName("ibraTech"));
         DaoProspect daoProspect=new DaoProspect();
         System.out.println(DaoProspect.ProspectFindAll());
-        DaoClient.createClient(client);
+        DaoClient.create(client);
 
 
 

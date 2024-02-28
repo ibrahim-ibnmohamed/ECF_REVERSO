@@ -6,10 +6,9 @@ import model.entite.Client;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DaoClient {
-    public static ArrayList ClientFindAll() throws SQLException, IOException, MyException {
+    public static ArrayList findAll() throws SQLException, IOException, MyException {
 
         Connection connection= new DaoConnection().getConnection();
         Statement preparedStatement = null;
@@ -54,7 +53,7 @@ public class DaoClient {
         return clients;
     }
 
-    public static Client ClientFindByName(String name) throws SQLException, IOException, MyException {
+    public static Client findByName(String name) throws SQLException, IOException, MyException {
         Connection connection = new DaoConnection().getConnection();
         PreparedStatement preparedStatement = null;
         String query = "SELECT " +
@@ -100,7 +99,7 @@ public class DaoClient {
     }
 
 
-    public static void createClient(Client client) throws SQLException, IOException, MyException {
+    public static void create(Client client) throws SQLException, IOException, MyException {
         // Établir la connexion à la base de données
         Connection connection = new DaoConnection().getConnection();
 
