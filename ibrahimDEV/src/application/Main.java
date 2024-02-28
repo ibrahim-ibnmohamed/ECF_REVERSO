@@ -52,7 +52,7 @@ public class Main {
 
         System.out.println(prospect);
         Client client = new Client(3,
-                "Abrar",
+                "ibrahim",
                 "6",
                 "rue de Paris",
                 "5000",
@@ -60,10 +60,12 @@ public class Main {
                 "Nice",
                 "adresse@mail.com",
                 "je suis un robo",
-                10,
+                1000,
                 5
         );
-
+        client.setId(2); // ID du client à mettre à jour
+        client.setRaisonSociale("Aljazeera");
+        client.setNomDeRue("1 rue de qater");
 
         try {
             Connection connection = new DaoConnection().getConnection();
@@ -83,10 +85,9 @@ public class Main {
         System.out.println(DaoClient.findByName("ibraTech"));
         DaoProspect daoProspect=new DaoProspect();
         System.out.println(DaoProspect.ProspectFindAll());
-        DaoClient.create(client);
-
-
-
+        //DaoClient.create(client);
+        DaoClient.delete(1);
+        DaoClient.update(client);
     }
 
 }
