@@ -1,4 +1,4 @@
-.idea       # Ignorer le répertoire .idea/
-out          # Ignorer le répertoire out/
-.iml/   
+.idea/      
+out/          
+*.iml  
 database.Properties

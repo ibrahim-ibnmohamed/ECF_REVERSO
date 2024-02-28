@@ -30,7 +30,7 @@ public class Client extends Societe {
     }
 
     public void setChiffreDaffaire(double chiffreDaffaire) throws MyException {
-        if (chiffreDaffaire<200){
+        if (chiffreDaffaire<=200){
             throw new MyException("Le chiffre d’affaires devra être renseigné et être supérieur à 200");
 
         }else   this.chiffreDaffaire = chiffreDaffaire;

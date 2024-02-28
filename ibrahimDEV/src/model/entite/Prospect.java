@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Prospect extends Societe  {
     private LocalDate dateDeProspection;
-    private ProspectInteresse prospectInteresse;
+    private String prospectInteresse;
 
 
     public enum ProspectInteresse {
@@ -28,7 +28,7 @@ public class Prospect extends Societe  {
                     String email,
                     String commentaire,
                     LocalDate dateDeProspection,
-                    ProspectInteresse prospectInteresse) throws MyException {
+                    String prospectInteresse) throws MyException {
         super(id, raisonSociale, numeroDeRue, nomDeRue, codePostal, telephone, ville, email, commentaire);
         this.setProspectInteresse(prospectInteresse);
         this.setDateDeProspection(dateDeProspection);
@@ -43,11 +43,11 @@ public class Prospect extends Societe  {
        this.dateDeProspection=dateDeProspection;
     }
 
-    public ProspectInteresse getProspectInteresse() {
+    public String getProspectInteresse() {
         return prospectInteresse;
     }
 
-    public void setProspectInteresse(ProspectInteresse prospectInteresse) {
+    public void setProspectInteresse(String prospectInteresse) {
         this.prospectInteresse = prospectInteresse;
     }
 
