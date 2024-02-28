@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class Prospect extends Societe  {
-    private Date dateDeProspection;
+    private LocalDate dateDeProspection;
     private ProspectInteresse prospectInteresse;
 
 
@@ -27,23 +27,20 @@ public class Prospect extends Societe  {
                     String ville,
                     String email,
                     String commentaire,
-                    Date dateDeProspection,
+                    LocalDate dateDeProspection,
                     ProspectInteresse prospectInteresse) throws MyException {
         super(id, raisonSociale, numeroDeRue, nomDeRue, codePostal, telephone, ville, email, commentaire);
         this.setProspectInteresse(prospectInteresse);
         this.setDateDeProspection(dateDeProspection);
     }
 
-    public Date getDateDeProspection() {
+    public LocalDate getDateDeProspection() {
         return dateDeProspection;
     }
 
-    public void setDateDeProspection(Date dateDeProspection) throws MyException {
+    public void setDateDeProspection(LocalDate dateDeProspection) throws MyException {
 
-        if(isValidDate(dateDeProspection.toString()))this.dateDeProspection = dateDeProspection;
-       else  {throw new MyException("Le format de date n'est pas correct.");
-
-        }
+       this.dateDeProspection=dateDeProspection;
     }
 
     public ProspectInteresse getProspectInteresse() {
@@ -62,12 +59,5 @@ public class Prospect extends Societe  {
                 '}';
     }
     // Vérifie le format de la date
-    public static boolean isValidDate(String date) {
-        try {
-            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+
 }
