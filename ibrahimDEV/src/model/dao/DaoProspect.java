@@ -131,7 +131,6 @@ public class DaoProspect {
                 preparedStatement.setDate(8, java.sql.Date.valueOf(prospect.getDateDeProspection()));
                 preparedStatement.setString(9, prospect.getCommentaire());
                 preparedStatement.setString(10, prospect.getProspectInteresse());
-
                 // Exécution de la déclaration pour insérer le nouveau prospect dans la base de données
                 preparedStatement.executeUpdate();
             }
@@ -156,9 +155,11 @@ public class DaoProspect {
 
                 // Exécution de la déclaration pour supprimer le prospect de la base de données
                 preparedStatement.executeUpdate();
+
             }
 
             // Fermeture de la connexion à la base de données
+
             connection.close();
         }
 

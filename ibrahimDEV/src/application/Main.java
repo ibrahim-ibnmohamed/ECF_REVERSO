@@ -1,11 +1,13 @@
 package application;
 
+import controleur.ControleurAccueil;
 import exception.MyException;
 import model.dao.DaoClient;
 import model.dao.DaoConnection;
 import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
+import vue.Formulair;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,7 +43,7 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(dateUser, formatter);
         Prospect prospect1 = new Prospect(1,
-                "GooGLE",
+                "Yahoo",
                 "51",
                 "rue d'alsace'",
                 "54100", "0733232315",
@@ -63,7 +65,7 @@ public class Main {
                 1000,
                 5
         );
-        DaoProspect.create(prospect1);
+       // DaoProspect.create(prospect1);
       //  prospect.setId(2); // ID du client à mettre à jour
       //  prospect.setRaisonSociale("PHP codeur");
       //  prospect.setNomDeRue("1 rue de chifre dix ");
@@ -89,6 +91,12 @@ public class Main {
        System.out.println(DaoProspect.findByName("EPTECH"));
        // DaoProspect.delete(4);
       // DaoProspect.update(prospect);
+
+       ControleurAccueil.init();
+
+     // Formulair formulair=new Formulair();
+       // formulair.setVisible(true);
     }
+
 
 }
