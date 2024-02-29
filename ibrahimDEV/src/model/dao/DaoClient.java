@@ -153,7 +153,8 @@ public class DaoClient {
         Connection connection = new DaoConnection().getConnection();
 
         // Requête SQL pour mettre à jour un client en fonction de son ID
-        String query = "UPDATE client SET RAISON_SOCIALE = ?, NOM_RUE = ?, NUM_RUE = ?, CODE_POSTALE = ?, VILLE = ?, NUM_TELEPHONE = ?, E_MAIL = ?, CHFFREAFAIR = ?, COMMENTAIRE = ?, NBR_EMPLOYE = ? WHERE ID_CLIENT = ?";
+        String query = "UPDATE client SET RAISON_SOCIALE = ?, NOM_RUE = ?, NUM_RUE = ?, CODE_POSTALE = ?, VILLE = ?, " +
+                "NUM_TELEPHONE = ?, E_MAIL = ?, CHFFREAFAIR = ?, COMMENTAIRE = ?, NBR_EMPLOYE = ? WHERE ID_CLIENT = ?";
 
         // Préparer la déclaration SQL avec des paramètres
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {

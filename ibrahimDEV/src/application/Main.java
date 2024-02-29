@@ -37,22 +37,22 @@ public class Main {
                 "COMMENTAIRE" +
                 " FROM client WHERE RAISON_SOCIALE = '" + valeurUser );
 
-        String dateUser = "02/02/2002";
+        String dateUser = "31/03/2024";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(dateUser, formatter);
-        Prospect prospect = new Prospect(1,
-                "ibraTech",
-                "5",
-                "rue de la republique",
-                "25541", "0733232315",
-                "nancy", "Ibrahim@hhh.com",
-                "",
+        Prospect prospect1 = new Prospect(1,
+                "GooGLE",
+                "51",
+                "rue d'alsace'",
+                "54100", "0733232315",
+                "nancy", "google@hhh.com",
+                "le client est interesé",
                 date,
-                "noooon");
+                "yes");
 
-        System.out.println(prospect);
-        Client client = new Client(3,
-                "ibrahim",
+       // System.out.println(prospect1);
+        Client client = new Client(2,
+                "ibrar",
                 "6",
                 "rue de Paris",
                 "5000",
@@ -63,15 +63,16 @@ public class Main {
                 1000,
                 5
         );
-        client.setId(2); // ID du client à mettre à jour
-        client.setRaisonSociale("Aljazeera");
-        client.setNomDeRue("1 rue de qater");
+        DaoProspect.create(prospect1);
+      //  prospect.setId(2); // ID du client à mettre à jour
+      //  prospect.setRaisonSociale("PHP codeur");
+      //  prospect.setNomDeRue("1 rue de chifre dix ");
 
         try {
             Connection connection = new DaoConnection().getConnection();
             if (connection != null) {
                 System.out.println("Connexion réussie à la base de données");
-                // You can perform database operations here
+
             } else {
                 System.out.println("Problème de connexion à la base de données");
             }
@@ -84,10 +85,10 @@ public class Main {
         System.out.println(DaoClient.findAll());
         System.out.println(DaoClient.findByName("ibraTech"));
         DaoProspect daoProspect=new DaoProspect();
-        System.out.println(DaoProspect.ProspectFindAll());
-        //DaoClient.create(client);
-        DaoClient.delete(1);
-        DaoClient.update(client);
+        //System.out.println(DaoProspect.findAll());
+       System.out.println(DaoProspect.findByName("EPTECH"));
+       // DaoProspect.delete(4);
+      // DaoProspect.update(prospect);
     }
 
 }
