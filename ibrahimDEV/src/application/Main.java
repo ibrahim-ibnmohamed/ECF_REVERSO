@@ -65,7 +65,7 @@ public class Main {
                 1000,
                 5
         );
-       // DaoProspect.create(prospect1);
+        // DaoProspect.create(prospect1);
       //  prospect.setId(2); // ID du client à mettre à jour
       //  prospect.setRaisonSociale("PHP codeur");
       //  prospect.setNomDeRue("1 rue de chifre dix ");
@@ -88,11 +88,12 @@ public class Main {
         System.out.println(DaoClient.findByName("ibraTech"));
         DaoProspect daoProspect=new DaoProspect();
         //System.out.println(DaoProspect.findAll());
-       System.out.println(DaoProspect.findByName("EPTECH"));
-       // DaoProspect.delete(4);
-      // DaoProspect.update(prospect);
+        System.out.println(DaoProspect.findByName("EPTECH"));
+        // DaoProspect.delete(4);
+        // DaoProspect.update(prospect);
 
-       ControleurAccueil.init();
+
+        ControleurAccueil.init();
 
      // Formulair formulair=new Formulair();
        // formulair.setVisible(true);
