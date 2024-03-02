@@ -1,17 +1,30 @@
 package vue;
 
+import controleur.ControleurFormulaire;
+import exception.MyException;
+import model.entite.Client;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static model.dao.DaoClient.findByName;
 
 public class Acceuil extends JDialog {
+    private ControleurFormulaire controleurFormulaire;
     private JPanel panel1;
     private JLabel lbTitre;
 
     private JComboBox<String> clientBtnCombo;
     private JComboBox<String> prospectBtnCombo;
+    private ArrayList<Client> clients;
 
     public Acceuil() {
+        controleurFormulaire = new ControleurFormulaire(null);
+
         setTitle("Accueil");
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -23,28 +36,48 @@ public class Acceuil extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 // Récupérer l'élément sélectionné
                 String choixSelectionne = (String) clientBtnCombo.getSelectedItem();
+                Client selectedClient = null;
+                try {
+                    selectedClient = findByName(choixSelectionne);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (MyException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Exécuter du code en fonction de l'élément sélectionné
                 switch (choixSelectionne) {
                     case "Create":
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
-
-                        Formulair formulair=new Formulair();
-
-                        formulair.setVisible(true);
+                        controleurFormulaire =new ControleurFormulaire(null);
 
                         dispose();
 
                         break;
                     case "Update":
 
+                        try {
+                            controleurFormulaire.selectClientToUpdate();
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+
+                        dispose();
 
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         break;
                     case "Delete":
+                        //   controleurFormulaire.afficherFormulaireMiseAJour(null);
+
+
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         break;
                     case "Find" :
+
+                        controleurFormulaire.afficherTousLesClients();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
 
                     default:
@@ -77,7 +110,7 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
 
                     default:
-                        // Faire quelque chose si nécessaire pour les choix non attendus
+
                         break;
                 }
             }
@@ -134,8 +167,5 @@ public class Acceuil extends JDialog {
         menu.show(comboBox, 0, comboBox.getHeight());
     }
 
-    public static void main(String[] args) {
-        Acceuil acceuil = new Acceuil();
-        acceuil.setVisible(true);
-    }
+
 }

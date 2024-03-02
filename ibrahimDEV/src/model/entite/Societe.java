@@ -90,7 +90,7 @@ abstract class Societe  {
     }
 
     public void setTelephone(String telephone) throws MyException {
-        if(telephone.length()<10){
+      if(telephone.length()<10){
             throw new MyException("le numero de téléphone est pas correct. ");
         }
         this.telephone = telephone;

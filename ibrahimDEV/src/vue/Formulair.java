@@ -1,15 +1,12 @@
 package vue;
 
-import exception.MyException;
-import model.dao.DaoClient;
+import controleur.ControleurFormulaire;
 import model.entite.Client;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class Formulair extends JDialog {
     private JTextField tfId;
@@ -27,121 +24,157 @@ public class Formulair extends JDialog {
     private JLabel lbId;
     private JButton btnValider;
     private JButton btnAccueil;
+    private JComboBox<String> clientComboBox;
 
-    public Formulair() {
-        setTitle("Création Client");
+    public Formulair(Client client) {
+        setTitle("Formulaire Client");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(14, 2, 10, 10));
 
-        lbId = new JLabel("idClient:");
-        add(lbId);
+        // Initialisation des champs du formulaire
         tfId = new JTextField();
+        tfRaisonSociale = new JTextField();
+        tfNomRue = new JTextField();
+        tfNumRue = new JTextField();
+        tfCodePostal = new JTextField();
+        tfVille = new JTextField();
+        tfTelephone = new JTextField();
+        tfEmail = new JTextField();
+        tfChiffreAffaire = new JTextField();
+        tfNombreEmployes = new JTextField();
+        tfCommentaire = new JTextField();
+
+        // Remplissage des champs si un client est passé en paramètre
+        if (client != null) {
+            tfId.setText(Integer.toString(client.getId()));
+            tfRaisonSociale.setText(client.getRaisonSociale());
+            tfNomRue.setText(client.getNomDeRue());
+            tfNumRue.setText(client.getNumeroDeRue());
+            tfCodePostal.setText(client.getCodePostal());
+            tfVille.setText(client.getVille());
+            tfTelephone.setText(client.getTelephone());
+            tfEmail.setText(client.getemail());
+            tfChiffreAffaire.setText(Double.toString(client.getChiffreDaffaire()));
+            tfNombreEmployes.setText(Integer.toString(client.getNombreEmployer()));
+            tfCommentaire.setText(client.getCommentaire());
+        }
+
+        // Ajout des composants au formulaire
+        lbId = new JLabel("ID Client:");
+        add(lbId);
         add(tfId);
 
         add(new JLabel("Raison Sociale:"));
-        tfRaisonSociale = new JTextField();
         add(tfRaisonSociale);
 
         add(new JLabel("Nom Rue:"));
-        tfNomRue = new JTextField();
         add(tfNomRue);
 
         add(new JLabel("Numéro Rue:"));
-        tfNumRue = new JTextField();
         add(tfNumRue);
 
         add(new JLabel("Code Postal:"));
-        tfCodePostal = new JTextField();
         add(tfCodePostal);
 
         add(new JLabel("Ville:"));
-        tfVille = new JTextField();
         add(tfVille);
 
         add(new JLabel("Téléphone:"));
-        tfTelephone = new JTextField();
         add(tfTelephone);
 
         add(new JLabel("Email:"));
-        tfEmail = new JTextField();
         add(tfEmail);
 
         add(new JLabel("Chiffre d'affaires:"));
-        tfChiffreAffaire = new JTextField();
         add(tfChiffreAffaire);
 
         add(new JLabel("Nombre Employés:"));
-        tfNombreEmployes = new JTextField();
         add(tfNombreEmployes);
 
-        tfCommentaire = new JTextField(); // Ajout du champ commentaire
         add(new JLabel("Commentaire:"));
         add(tfCommentaire);
 
-        btnValider = new JButton("Valider"); // Bouton pour valider
-        btnValider.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String idClient = tfId.getText();
-                String raisonSociale = tfRaisonSociale.getText();
-                String nomRue = tfNomRue.getText();
-                String numRue = tfNumRue.getText();
-                String codePostal = tfCodePostal.getText();
-                String ville = tfVille.getText();
-                String telephone = tfTelephone.getText();
-                String email = tfEmail.getText();
-                String chiffreAffaireStr = tfChiffreAffaire.getText();
-                String nombreEmployesStr = tfNombreEmployes.getText();
-                String commentaire = tfCommentaire.getText();
-
-                // Vérification de la saisie
-                if (idClient.isEmpty() || raisonSociale.isEmpty() || nomRue.isEmpty() || numRue.isEmpty() ||
-                        codePostal.isEmpty() || ville.isEmpty() || telephone.isEmpty() || email.isEmpty() ||
-                        chiffreAffaireStr.isEmpty() || nombreEmployesStr.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                try {
-
-                    int id = Integer.parseInt(idClient);
-                    double chiffreAffaire = Double.parseDouble(chiffreAffaireStr);
-                    int nombreEmployes = Integer.parseInt(nombreEmployesStr);
-
-                    // Créer un Client
-                    Client client = new Client(id, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
-                    // Appeler la méthode de DAO pour créer le client dans la base de données
-                    DaoClient.create(client);
-                    JOptionPane.showMessageDialog(Formulair.this, "Client créé avec succès !");
-                } catch (NumberFormatException ex) {
-                    // Gérer les erreurs de format des nombres
-                    JOptionPane.showMessageDialog(Formulair.this, "Erreur de format pour le chiffre d'affaires ou le nombre d'employés", "Erreur", JOptionPane.ERROR_MESSAGE);
-                } catch (SQLException | IOException | MyException ex) {
-                    // Gérer les erreurs lors de la création dans la base de données
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(Formulair.this, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
+        btnValider = new JButton("Valider");
         add(btnValider);
 
-        btnAccueil = new JButton("Accueil"); // Bouton pour retourner à l'accueil
-        btnAccueil.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Acceuil acceuil = new Acceuil();
-
-                acceuil.setVisible(true);
-
-                dispose();
-            }
-        });
+        btnAccueil = new JButton("Accueil");
         add(btnAccueil);
+
+
 
         setSize(800, 800);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void addValiderListener(ActionListener listener) {
+        btnValider.addActionListener(listener);
+    }
+
+    public void addAccueilListener(ActionListener listener) {
+        btnAccueil.addActionListener(listener);
+    }
+
+    public void updateClient(Client client) {
+        // Met à jour les champs du formulaire avec les informations du client
+        tfId.setText(Integer.toString(client.getId()));
+        tfRaisonSociale.setText(client.getRaisonSociale());
+        tfNomRue.setText(client.getNomDeRue());
+        tfNumRue.setText(client.getNumeroDeRue());
+        tfCodePostal.setText(client.getCodePostal());
+        tfVille.setText(client.getVille());
+        tfTelephone.setText(client.getTelephone());
+        tfEmail.setText(client.getemail());
+        tfChiffreAffaire.setText(Double.toString(client.getChiffreDaffaire()));
+        tfNombreEmployes.setText(Integer.toString(client.getNombreEmployer()));
+        tfCommentaire.setText(client.getCommentaire());
+    }
+
+
+
+
+
+    public JTextField getTfId() {
+        return tfId;
+    }
+
+    public JTextField getTfRaisonSociale() {
+        return tfRaisonSociale;
+    }
+
+    public JTextField getTfNomRue() {
+        return tfNomRue;
+    }
+
+    public JTextField getTfNumRue() {
+        return tfNumRue;
+    }
+
+    public JTextField getTfCodePostal() {
+        return tfCodePostal;
+    }
+
+    public JTextField getTfVille() {
+        return tfVille;
+    }
+
+    public JTextField getTfTelephone() {
+        return tfTelephone;
+    }
+
+    public JTextField getTfEmail() {
+        return tfEmail;
+    }
+
+    public JTextField getTfChiffreAffaire() {
+        return tfChiffreAffaire;
+    }
+
+    public JTextField getTfNombreEmployes() {
+        return tfNombreEmployes;
+    }
+
+    public JTextField getTfCommentaire() {
+        return tfCommentaire;
     }
 }
