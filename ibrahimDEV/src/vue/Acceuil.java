@@ -53,6 +53,7 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         controleurFormulaire =new ControleurFormulaire(null);
 
+
                         dispose();
 
                         break;
@@ -70,7 +71,7 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         break;
                     case "Delete":
-                        //   controleurFormulaire.afficherFormulaireMiseAJour(null);
+                        controleurFormulaire.selectClientToDelete();
 
 
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
@@ -98,6 +99,7 @@ public class Acceuil extends JDialog {
                 // Exécuter du code en fonction de l'élément sélectionné
                 switch (choixSelectionne) {
                     case "Create":
+                        FormulairProspect formulairProspect= new FormulairProspect(null);
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         break;
                     case "Update":
