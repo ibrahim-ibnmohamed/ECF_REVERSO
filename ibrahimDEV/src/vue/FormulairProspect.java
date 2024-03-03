@@ -86,10 +86,10 @@ public class FormulairProspect extends JDialog {
         add(new JLabel("Email:"));
         add(tfEmail);
 
-        add(new JLabel("interessé:"));
+        add(new JLabel("Date :"));
         add(tfDateDeProspection);
 
-        add(new JLabel("Date :"));
+        add(new JLabel("interessé:"));
         add(tfProspectInteresse);
 
         add(new JLabel("Commentaire:"));
@@ -115,21 +115,21 @@ public class FormulairProspect extends JDialog {
     public void addAccueilListener(ActionListener listener) {
         btnAccueil.addActionListener(listener);
     }
-/*
-    public void updateProcpect(Procpect procpect) {
-        // Met à jour les champs du formulaire avec les informations du procpect
-        tfId.setText(Integer.toString(procpect.getId()));
-        tfRaisonSociale.setText(procpect.getRaisonSociale());
-        tfNomRue.setText(procpect.getNomDeRue());
-        tfNumRue.setText(procpect.getNumeroDeRue());
-        tfCodePostal.setText(procpect.getCodePostal());
-        tfVille.setText(procpect.getVille());
-        tfTelephone.setText(procpect.getTelephone());
-        tfEmail.setText(procpect.getemail());
-        tfDateDeProspection.setText(Double.toString(procpect.getChiffreDaffaire()));
-        tfProspectInteresse.setText(Integer.toString(procpect.getNombreEmployer()));
-        tfCommentaire.setText(procpect.getCommentaire());
-    }*/
+
+    public void updateProspect(Prospect prospect) {
+        // Met à jour les champs du formulaire avec les informations du prospect
+        tfId.setText(Integer.toString(prospect.getId()));
+        tfRaisonSociale.setText(prospect.getRaisonSociale());
+        tfNomRue.setText(prospect.getNomDeRue());
+        tfNumRue.setText(prospect.getNumeroDeRue());
+        tfCodePostal.setText(prospect.getCodePostal());
+        tfVille.setText(prospect.getVille());
+        tfTelephone.setText(prospect.getTelephone());
+        tfEmail.setText(prospect.getemail());
+        tfDateDeProspection.setText(prospect.getDateDeProspection().toString());
+        tfProspectInteresse.setText(String.valueOf(prospect.getProspectInteresse()));
+        tfCommentaire.setText(prospect.getCommentaire());
+    }
 
 
 
@@ -178,4 +178,6 @@ public class FormulairProspect extends JDialog {
     public JTextField getTfCommentaire() {
         return tfCommentaire;
     }
+
+
 }

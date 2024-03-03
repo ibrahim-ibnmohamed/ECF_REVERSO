@@ -3,6 +3,7 @@ package vue;
 import controleur.ControleurFormulaire;
 import exception.MyException;
 import model.entite.Client;
+import model.entite.Prospect;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static model.dao.DaoClient.create;
 import static model.dao.DaoClient.findByName;
 
 public class Acceuil extends JDialog {
@@ -23,8 +25,6 @@ public class Acceuil extends JDialog {
     private ArrayList<Client> clients;
 
     public Acceuil() {
-        controleurFormulaire = new ControleurFormulaire(null);
-
         setTitle("Accueil");
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,9 +32,10 @@ public class Acceuil extends JDialog {
         setLocationRelativeTo(null);
 
         clientBtnCombo.addActionListener(new ActionListener() {
+            Client client = null;
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Récupérer l'élément sélectionné
                 String choixSelectionne = (String) clientBtnCombo.getSelectedItem();
                 Client selectedClient = null;
                 try {
@@ -47,72 +48,66 @@ public class Acceuil extends JDialog {
                     throw new RuntimeException(ex);
                 }
 
-                // Exécuter du code en fonction de l'élément sélectionné
                 switch (choixSelectionne) {
                     case "Create":
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
-                        controleurFormulaire =new ControleurFormulaire(null);
-
-
+                        ControleurFormulaire controleurFormulaire= new ControleurFormulaire(client);
+                        controleurFormulaire.createClient();
                         dispose();
-
                         break;
                     case "Update":
-
                         try {
-                            controleurFormulaire.selectClientToUpdate();
+                            ControleurFormulaire controleurFormulaire0= new ControleurFormulaire(client);
+                            controleurFormulaire0.selectClientToUpdate();
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
-
-
                         dispose();
-
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         break;
                     case "Delete":
-                        controleurFormulaire.selectClientToDelete();
-
-
+                        ControleurFormulaire controleurFormulaireDelete= new ControleurFormulaire(client);
+                        controleurFormulaireDelete.selectClientToDelete();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         break;
                     case "Find" :
-
-                        controleurFormulaire.afficherTousLesClients();
+                        ControleurFormulaire controleurFormulaireFind= new ControleurFormulaire(client);
+                        controleurFormulaireFind.afficherTousLesClients();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-
                     default:
-                        // Faire quelque chose si nécessaire pour les choix non attendus
                         break;
                 }
             }
         });
 
-    }
-    {
         prospectBtnCombo.addActionListener(new ActionListener() {
+            Prospect prospect = null;
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Récupérer l'élément sélectionné
                 String choixSelectionne = (String) prospectBtnCombo.getSelectedItem();
 
-                // Exécuter du code en fonction de l'élément sélectionné
                 switch (choixSelectionne) {
                     case "Create":
-                        FormulairProspect formulairProspect= new FormulairProspect(null);
+                        ControleurFormulaire controleurFormulaire1 =new ControleurFormulaire(prospect);
+                        dispose();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         break;
                     case "Update":
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
+                        try {
+                            ControleurFormulaire controleurFormulaire2 =new ControleurFormulaire(prospect);
+                            controleurFormulaire2.selectProspctToUpdate();
+                            dispose();
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         break;
                     case "Delete":
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         break;
                     case "Find" :
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-
                     default:
-
                         break;
                 }
             }
@@ -120,54 +115,8 @@ public class Acceuil extends JDialog {
     }
 
     private void createUIComponents() {
-        // Créez vos composants personnalisés ici si nécessaire
-        panel1 = new JPanel(); // Créez votre panel
+        panel1 = new JPanel();
         clientBtnCombo = new JComboBox<>();
         prospectBtnCombo = new JComboBox<>();
     }
-
-    private void afficherMenuActions(String type, JComboBox<String> comboBox) {
-        JPopupMenu menu = new JPopupMenu();
-        JMenuItem itemAjouter = new JMenuItem("Ajouter");
-        JMenuItem itemAfficher = new JMenuItem("Afficher");
-        JMenuItem itemModifier = new JMenuItem("Modifier");
-        JMenuItem itemSupprimer = new JMenuItem("Supprimer");
-
-        itemAjouter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Acceuil.this, "Action Ajouter pour " + type);
-            }
-        });
-
-        itemAfficher.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Acceuil.this, "Action Afficher pour " + type);
-            }
-        });
-
-        itemModifier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Acceuil.this, "Action Modifier pour " + type);
-            }
-        });
-
-        itemSupprimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Acceuil.this, "Action Supprimer pour " + type);
-            }
-        });
-
-        menu.add(itemAjouter);
-        menu.add(itemAfficher);
-        menu.add(itemModifier);
-        menu.add(itemSupprimer);
-
-        menu.show(comboBox, 0, comboBox.getHeight());
-    }
-
-
 }

@@ -9,7 +9,7 @@ public class ControleurAccueil {
     private static Acceuil acceuil;
     public static void init(){
         acceuil= new Acceuil();
-        acceuil.setVisible(true);
+       acceuil.setVisible(true);
 
     }
 }

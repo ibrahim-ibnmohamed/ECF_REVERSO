@@ -26,7 +26,10 @@ public class Formulair extends JDialog {
     private JButton btnAccueil;
     private JComboBox<String> clientComboBox;
 
+    private Client client;
+
     public Formulair(Client client) {
+        this.client=client;
         setTitle("Formulaire Client");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(14, 2, 10, 10));
