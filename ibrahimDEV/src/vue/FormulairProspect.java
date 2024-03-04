@@ -1,12 +1,10 @@
 
 package vue;
 
-        import controleur.ControleurFormulaire;
         import model.entite.Prospect;
 
         import javax.swing.*;
         import java.awt.*;
-        import java.awt.event.ActionEvent;
         import java.awt.event.ActionListener;
 
 public class FormulairProspect extends JDialog {

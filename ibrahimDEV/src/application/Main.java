@@ -7,7 +7,6 @@ import model.dao.DaoConnection;
 import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
-import vue.Formulair;
 
 import java.io.IOException;
 import java.sql.Connection;

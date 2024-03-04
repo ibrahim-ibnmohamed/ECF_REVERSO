@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static model.dao.DaoClient.create;
 import static model.dao.DaoClient.findByName;
 
 public class Acceuil extends JDialog {
@@ -53,7 +52,7 @@ public class Acceuil extends JDialog {
                     case "Create":
 
                         try {
-                            ControleurFormulaire.init("client");
+                            ControleurFormulaire.init("createClient");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -75,6 +74,7 @@ public class Acceuil extends JDialog {
                             throw new RuntimeException(ex);
                         }
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
+                        dispose();
                         break;
                     case "Find" :
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
@@ -97,29 +97,37 @@ public class Acceuil extends JDialog {
 
                 switch (choixSelectionne) {
                     case "Create":
-                        ControleurFormulaire controleurFormulaire1 =new ControleurFormulaire(prospect);
+                        try {
+                            ControleurFormulaire.init("createProsecte");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         dispose();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         break;
                     case "Update":
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         try {
-                            ControleurFormulaire controleurFormulaire2 =new ControleurFormulaire(prospect);
-                            controleurFormulaire2.selectProspctToUpdate();
+                            ControleurFormulaire.init("updateProspect");
                             dispose();
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
                         break;
                     case "Delete":
-                        ControleurFormulaire controleurFormulaire3 =new ControleurFormulaire(prospect);
-                        controleurFormulaire3.selectProcpectToDelete();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
+                        try {
+                            ControleurFormulaire.init("deleteProspect");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
                         dispose();
                         break;
                     case "Find" :
-                        ControleurAffichage.init("procpect");
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
+                        ControleurAffichage.init("procpect");
+
                         dispose();
                     default:
                         break;
