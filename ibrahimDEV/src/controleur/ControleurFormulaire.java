@@ -22,22 +22,30 @@ import java.util.ArrayList;
 
 public class ControleurFormulaire {
 
-    private Formulair vueClient;
-    private FormulairProspect vueProspect;
-    private Client client;
-    private Prospect prospect;
-    public ControleurFormulaire(Client client) {
-        System.out.println("ControleurFormulaire applé");
-        this.client = client;
 
-            this.vueClient = new Formulair(client);
-            initialiserEcouteursClient();
+    public static void init(String choix) throws MyException {
+        Formulair formulair= new Formulair(choix);
+        formulair.setVisible(true);
+
+
+    }
+
+    private static Formulair vueClient;
+    private FormulairProspect vueProspect;
+    public static Client clientVise;
+    public static Prospect prospectVise;
+    public ControleurFormulaire(Client client) throws MyException {
+        System.out.println("ControleurFormulaire applé");
+        clientVise = client;
+
+            this.vueClient = new Formulair("client");
+
 
     }
 
     public ControleurFormulaire(Prospect prospect) {
         System.out.println("ControleurFormulaire applé");
-        this.prospect = prospect;
+        prospectVise = prospect;
 
 
             this.vueProspect = new FormulairProspect(prospect);
@@ -45,17 +53,11 @@ public class ControleurFormulaire {
 
     }
 
+    public static void deleteClient(Client clientVise) throws MyException, SQLException, IOException {
 
-
-
-
-
-
-    private void initialiserEcouteursClient() {
-        this.vueClient.addValiderListener(new ValiderListenerClient());
-        this.vueClient.addAccueilListener(new AccueilListener());
-
+        DaoClient.delete(clientVise.getId());
     }
+
 
     private void initialiserEcouteursProspect() {
         this.vueProspect.addValiderListener(new ValiderListenerProspect());
@@ -63,7 +65,7 @@ public class ControleurFormulaire {
     }
 
 
-    private class ValiderListenerClient implements ActionListener {
+  /*  private class ValiderListenerClient implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (client == null) {
@@ -76,12 +78,12 @@ public class ControleurFormulaire {
                 }
             }
         }
-    }
+    }*/
 
     private class ValiderListenerProspect implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (client == null) {
+            if (clientVise == null) {
                 createProspect();
             } else {
                 try {
@@ -96,7 +98,7 @@ public class ControleurFormulaire {
 
     public void createProspect() {
         System.out.println("createProspect applé");
-        if (this.prospect != null) {
+        if (prospectVise != null) {
             JOptionPane.showMessageDialog(null, "Un Prospect existe déjà. Utilisez la fonction de mise à jour.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -158,37 +160,23 @@ public class ControleurFormulaire {
 
 
 
-    public void createClient() {
+    public static void createClient(int idClient,String
+            raisonSociale,String numRue,String nomRue,
+                                    String codePostal,
+                                    String telephone,
+                                    String ville,
+                                    String email,
+                                    String commentaire,
+                                    double chiffreAffaireStr,
+                                    int nombreEmployesStr) {
         System.out.println("createClient applé");
-        if (this.client != null) {
-            JOptionPane.showMessageDialog(null, "Un client existe déjà. Utilisez la fonction de mise à jour.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String idClient = vueClient.getTfId().getText();
-        String raisonSociale = vueClient.getTfRaisonSociale().getText();
-        String nomRue = vueClient.getTfNomRue().getText();
-        String numRue = vueClient.getTfNumRue().getText();
-        String codePostal = vueClient.getTfCodePostal().getText();
-        String ville = vueClient.getTfVille().getText();
-        String telephone = vueClient.getTfTelephone().getText();
-        String email = vueClient.getTfEmail().getText();
-        String chiffreAffaireStr = vueClient.getTfChiffreAffaire().getText();
-        String nombreEmployesStr = vueClient.getTfNombreEmployes().getText();
-        String commentaire = vueClient.getTfCommentaire().getText();
-
-        if (idClient.isEmpty() || raisonSociale.isEmpty() || nomRue.isEmpty() || numRue.isEmpty() ||
-                codePostal.isEmpty() || ville.isEmpty() || telephone.isEmpty() || email.isEmpty() ||
-                chiffreAffaireStr.isEmpty() || nombreEmployesStr.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
         try {
-            int id = Integer.parseInt(idClient);
-            double chiffreAffaire = Double.parseDouble(chiffreAffaireStr);
-            int nombreEmployes = Integer.parseInt(nombreEmployesStr);
 
-            Client client = new Client(id, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
+            double chiffreAffaire = Double.parseDouble(String.valueOf(chiffreAffaireStr));
+            int nombreEmployes = Integer.parseInt(String.valueOf(nombreEmployesStr));
+
+            Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
             DaoClient.create(client);
             JOptionPane.showMessageDialog(vueClient, "Client créé avec succès !");
         } catch (NumberFormatException ex) {
@@ -198,9 +186,9 @@ public class ControleurFormulaire {
             JOptionPane.showMessageDialog(vueClient, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void selectClientToUpdate() throws MyException {
+    public static  void selectClient() throws MyException {
         System.out.println("selectClientToUpdate appelé ");
-        if (this.client == null) {
+        if (clientVise == null) {
             ArrayList<Client> clients = null;
             try {
                 clients = DaoClient.findAll();
@@ -237,49 +225,44 @@ public class ControleurFormulaire {
                 // Vérifier si le client sélectionné a été trouvé
                 if (selectedClient != null) {
                     // Mettre à jour le formulaire avec les informations du client sélectionné
-                    this.client = selectedClient; // Assigner le client sélectionné à this.client
-                    vueClient.updateClient(selectedClient);
+                    clientVise= selectedClient; // Assigner le client sélectionné à this.client
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Client non trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
             // Si un client est déjà sélectionné, appeler directement updateClient()
-            try {
-                updateClient();
-            } catch (MyException ex) {
-                throw new RuntimeException(ex);
-            }
+
         }
     }
 
 
 
 
-    private void updateClient() throws MyException {
-        System.out.println("update applé ");
-        // Créer une nouvelle variable locale pour l'objet mis à jour
-
-        Client updatedClient = new Client(
-                client.getId(), // ID
-                vueClient.getTfRaisonSociale().getText(), // Raison sociale
-                vueClient.getTfNumRue().getText(), // Numéro de rue
-                vueClient.getTfNomRue().getText(), // Nom de rue
-                vueClient.getTfCodePostal().getText(), // Code postal
-                vueClient.getTfTelephone().getText(), // Téléphone
-                vueClient.getTfVille().getText(), // Ville
-                vueClient.getTfEmail().getText(), // Email
-                vueClient.getTfCommentaire().getText(), // Commentaire
-                Double.parseDouble(vueClient.getTfChiffreAffaire().getText()), // Chiffre d'affaires
-                Integer.parseInt(vueClient.getTfNombreEmployes().getText()) // Nombre d'employés
-        );
+    public static void updateClient( int idClient,String
+            raisonSociale,String numRue,String nomRue,
+                               String codePostal,
+                               String telephone,
+                               String ville,
+                               String email,
+                               String commentaire,
+                               double chiffreAffaireStr,
+                               int nombreEmployesStr) throws MyException {
+        System.out.println("createClient applé");
 
         try {
-            DaoClient.update(updatedClient);
-            JOptionPane.showMessageDialog(vueClient, "Client mis à jour avec succès !");
-        } catch (SQLException | IOException | MyException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(vueClient, "Erreur lors de la mise à jour : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+
+            double chiffreAffaire = Double.parseDouble(String.valueOf(chiffreAffaireStr));
+            int nombreEmployes = Integer.parseInt(String.valueOf(nombreEmployesStr));
+
+            Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
+            DaoClient.update(client);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -287,7 +270,7 @@ public class ControleurFormulaire {
 
     public void selectProspctToUpdate() throws MyException {
         System.out.println("selectProspectToUpdate appelé ");
-        if (this.prospect == null) {
+        if (prospectVise == null) {
             ArrayList<Prospect> prospects = null;
             try {
                 prospects = DaoProspect.findAll();
@@ -324,7 +307,7 @@ public class ControleurFormulaire {
                 // Vérifier si le prospect sélectionné a été trouvé
                 if (selectedProspect != null) {
                     // Mettre à jour le formulaire avec les informations du prospect sélectionné
-                    this.prospect = selectedProspect; // Assigner le prospect sélectionné à this.prospect
+                    prospectVise = selectedProspect; // Assigner le prospect sélectionné à this.prospect
                     vueProspect.updateProspect(selectedProspect);
                 } else {
                     JOptionPane.showMessageDialog(null, "Prospect non trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -344,45 +327,7 @@ public class ControleurFormulaire {
 
 
     private void updateProspect() throws MyException {
-        // Récupérer le texte saisi par l'utilisateur pour la date de prospection
-        String dateDeProspectionText = vueProspect.getTfDateDeProspection().getText();
-        LocalDate dateDeProspection = null;
-        // Vérifier si un texte a été saisi
-        if (!dateDeProspectionText.isEmpty()) {
-            // Convertir le texte en LocalDate
-            try {
-                dateDeProspection = LocalDate.parse(dateDeProspectionText);
-            } catch (DateTimeParseException e) {
-                // Gérer l'exception si le format de la date est incorrect
-                e.printStackTrace();
-                throw new MyException("Format de date incorrect pour la date de prospection");
-            }
-        }
 
-
-
-        // Créer un nouvel objet Prospect avec les informations mises à jour
-        Prospect updatedProspect = new Prospect(
-                prospect.getId(), // ID
-                vueProspect.getTfRaisonSociale().getText(), // Raison sociale
-                vueProspect.getTfNumRue().getText(), // Numéro de rue
-                vueProspect.getTfNomRue().getText(), // Nom de rue
-                vueProspect.getTfCodePostal().getText(), // Code postal
-                vueProspect.getTfTelephone().getText(), // Téléphone
-                vueProspect.getTfVille().getText(), // Ville
-                vueProspect.getTfEmail().getText(), // Email
-                vueProspect.getTfCommentaire().getText(), // Commentaire
-                dateDeProspection, // Date de prospection
-                vueProspect.getTfProspectInteresse().getText()// Prospect intéressé
-        );
-
-        try {
-            DaoProspect.update(updatedProspect);
-            JOptionPane.showMessageDialog(vueProspect, "Prospect mis à jour avec succès !");
-        } catch (SQLException | IOException | MyException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(vueProspect, "Erreur lors de la mise à jour : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
 
@@ -396,7 +341,7 @@ public class ControleurFormulaire {
     }
 
     public void selectClientToDelete() {
-        if (this.client == null ) {
+        if (clientVise == null ) {
             ArrayList<Client> clients;
             try {
                 clients = DaoClient.findAll();
@@ -453,7 +398,7 @@ public class ControleurFormulaire {
     }
 //-------------------------------
     public void selectProcpectToDelete() {
-        if (this.prospect == null ) {
+        if (prospectVise== null ) {
             ArrayList<Prospect> prospects;
             try {
                 prospects = DaoProspect.findAll();

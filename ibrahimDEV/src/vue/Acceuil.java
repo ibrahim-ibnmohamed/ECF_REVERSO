@@ -51,14 +51,17 @@ public class Acceuil extends JDialog {
 
                 switch (choixSelectionne) {
                     case "Create":
-                        ControleurFormulaire controleurFormulaire= new ControleurFormulaire(client);
-                        controleurFormulaire.createClient();
+
+                        try {
+                            ControleurFormulaire.init("client");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         dispose();
                         break;
                     case "Update":
                         try {
-                            ControleurFormulaire controleurFormulaire0= new ControleurFormulaire(client);
-                            controleurFormulaire0.selectClientToUpdate();
+                            ControleurFormulaire.init("updateClient");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -66,8 +69,11 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         break;
                     case "Delete":
-                        ControleurFormulaire controleurFormulaireDelete= new ControleurFormulaire(client);
-                        controleurFormulaireDelete.selectClientToDelete();
+                        try {
+                            ControleurFormulaire.init("deleteClient");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         break;
                     case "Find" :
