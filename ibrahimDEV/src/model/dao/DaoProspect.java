@@ -103,7 +103,7 @@ public class DaoProspect {
             // Fermeture des ressources
             rs.close();
             preparedStatement.close();
-            connection.close();
+
 
             return prospect; // Retourner null si aucun prospect n'est trouvé
         }
@@ -135,8 +135,8 @@ public class DaoProspect {
                 preparedStatement.executeUpdate();
             }
 
-            // Fermeture de la connexion à la base de données
-            connection.close();
+
+
 
         }
 
@@ -158,9 +158,7 @@ public class DaoProspect {
 
             }
 
-            // Fermeture de la connexion à la base de données
 
-            connection.close();
         }
 
     //--------Update-------------
@@ -194,8 +192,7 @@ public class DaoProspect {
             preparedStatement.executeUpdate();
         }
 
-        // Fermeture de la connexion à la base de données
-        connection.close();
+
     }
 }
 

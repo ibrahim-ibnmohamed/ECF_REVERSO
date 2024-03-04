@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.ControleurAffichage;
 import controleur.ControleurFormulaire;
 import exception.MyException;
 import model.entite.Client;
@@ -70,9 +71,11 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         break;
                     case "Find" :
-                        ControleurFormulaire controleurFormulaireFind= new ControleurFormulaire(client);
-                        controleurFormulaireFind.afficherTousLesClients();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
+                        ControleurAffichage.init("client");
+                        dispose();
+
+
                     default:
                         break;
                 }
@@ -103,10 +106,15 @@ public class Acceuil extends JDialog {
                         }
                         break;
                     case "Delete":
+                        ControleurFormulaire controleurFormulaire3 =new ControleurFormulaire(prospect);
+                        controleurFormulaire3.selectProcpectToDelete();
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
+                        dispose();
                         break;
                     case "Find" :
+                        ControleurAffichage.init("procpect");
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
+                        dispose();
                     default:
                         break;
                 }

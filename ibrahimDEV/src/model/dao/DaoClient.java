@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoClient {
-    public static ArrayList findAll() throws SQLException, IOException, MyException {
+    public static ArrayList<Client>   findAll() throws SQLException, IOException, MyException {
 
         Connection connection= new DaoConnection().getConnection();
         Statement preparedStatement = null;
@@ -45,11 +45,9 @@ public class DaoClient {
             Client client= new Client(idClient,raisonSociale,numRue,nomRue,codePostale,numTelephone,ville,eMail,commentaire,chffreAffair,nbrEmploye);
             clients.add(client);
         }
-
-        // Fermeture des ressources
         rs.close();
         preparedStatement.close();
-        connection.close();
+
         return clients;
     }
 
@@ -93,7 +91,7 @@ public class DaoClient {
         // Fermeture des ressources
         rs.close();
         preparedStatement.close();
-        connection.close();
+
 
         return client;
     }
@@ -120,13 +118,9 @@ public class DaoClient {
             preparedStatement.setDouble(8, client.getChiffreDaffaire());
             preparedStatement.setString(9, client.getCommentaire());
             preparedStatement.setInt(10, client.getNombreEmployer());
-
-            // Exécution de la déclaration pour insérer le nouveau client dans la base de données
             preparedStatement.executeUpdate();
         }
 
-        // Fermeture de la connexion à la base de données
-        connection.close();
     }
     public static void delete(int idClient) throws SQLException, IOException, MyException {
         // Établir la connexion à la base de données
@@ -144,8 +138,6 @@ public class DaoClient {
             preparedStatement.executeUpdate();
         }
 
-        // Fermeture de la connexion à la base de données
-        connection.close();
     }
 
     public static void update(Client client) throws SQLException, IOException, MyException {
@@ -174,16 +166,7 @@ public class DaoClient {
             // Exécution de la déclaration pour mettre à jour le client dans la base de données
             preparedStatement.executeUpdate();
         }
-
-        // Fermeture de la connexion à la base de données
-        connection.close();
     }
-
-
-
-
-
-
 }
 
 

@@ -395,35 +395,6 @@ public class ControleurFormulaire {
         vueProspect.dispose();
     }
 
-    public void afficherTousLesClients() {
-        ArrayList<Client> clients = null;
-        try {
-            clients = DaoClient.findAll();
-        } catch (SQLException | IOException | MyException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des clients : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (clients.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Aucun client trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        StringBuilder message = new StringBuilder("Liste des clients :\n\n");
-        for (Client client : clients) {
-            message.append("ID: ").append(client.getId()).append("\n");
-            message.append("Raison sociale: ").append(client.getRaisonSociale()).append("\n");
-            message.append("Adresse: ").append(client.getNumeroDeRue()).append(" ").append(client.getNomDeRue()).append(", ").append(client.getCodePostal()).append(" ").append(client.getVille()).append("\n");
-            message.append("Téléphone: ").append(client.getTelephone()).append("\n");
-            message.append("Email: ").append(client.getemail()).append("\n");
-            message.append("Chiffre d'affaires: ").append(client.getChiffreDaffaire()).append("\n");
-            message.append("Nombre d'employés: ").append(client.getNombreEmployer()).append("\n");
-            message.append("Commentaire: ").append(client.getCommentaire()).append("\n\n");
-        }
-
-        JOptionPane.showMessageDialog(null, message.toString(), "Liste des clients", JOptionPane.INFORMATION_MESSAGE);
-    }
     public void selectClientToDelete() {
         if (this.client == null ) {
             ArrayList<Client> clients;
@@ -478,6 +449,63 @@ public class ControleurFormulaire {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Un client est déjà sélectionné. Vous ne pouvez pas supprimer un client en cours de modification.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+//-------------------------------
+    public void selectProcpectToDelete() {
+        if (this.prospect == null ) {
+            ArrayList<Prospect> prospects;
+            try {
+                prospects = DaoProspect.findAll();
+            } catch (SQLException | IOException | MyException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des procpects : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Vérifier si la liste des clients est vide
+            if (prospects.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Aucun procpecte trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Créer un tableau de noms de clients pour la boîte de dialogue
+            String[] prospectNames = new String[prospects.size()];
+            for (int i = 0; i < prospects.size(); i++) {
+                prospectNames[i] = prospects.get(i).getRaisonSociale();
+            }
+
+            // Afficher la boîte de dialogue pour sélectionner un client
+            String selectedProspectName = (String) JOptionPane.showInputDialog(null, "Choisissez un Prospecte à supprimer :", "Choix du Prospecte", JOptionPane.QUESTION_MESSAGE, null, prospectNames, prospectNames[0]);
+            if (selectedProspectName != null) {
+                // Rechercher le prospecte sélectionné dans la liste des clients
+                Prospect selectedProspect = null;
+                for (Prospect prospect : prospects) {
+                    if (prospect.getRaisonSociale().equals(selectedProspectName)) {
+                        selectedProspect = prospect;
+                        break;
+                    }
+                }
+
+                // Vérifier si le client sélectionné a été trouvé
+                if (selectedProspect!= null) {
+                    // Demander confirmation avant de supprimer le client
+                    int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce precpecte ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+                    if (confirmDelete == JOptionPane.YES_OPTION) {
+                        try {
+                            DaoProspect.delete(selectedProspect.getId());
+                            JOptionPane.showMessageDialog(null, "Prosoecte supprimé avec succès !");
+                        } catch (SQLException | IOException | MyException ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Erreur lors de la suppression du prospecte: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Prospecte non trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Un prespecte est déjà sélectionné. Vous ne pouvez pas supprimer un client en cours de modification.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 

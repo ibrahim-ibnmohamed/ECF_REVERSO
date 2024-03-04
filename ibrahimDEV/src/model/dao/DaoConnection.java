@@ -12,15 +12,6 @@ public class DaoConnection {
 
     private static Connection connection;
 
-    static {
-        try {
-            connecter();
-        } catch (IOException | SQLException e) {
-            System.err.println("Erreur lors de l'initialisation de la connexion : " + e.getMessage());
-
-        }
-    }
-
     private static void connecter() throws IOException, SQLException {
         Properties dataProperties = new Properties();
         File fichier = new File("database.Properties");
