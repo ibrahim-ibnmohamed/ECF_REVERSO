@@ -37,6 +37,9 @@ public class Prospect extends Societe  {
     }
 
     public void setDateDeProspection(LocalDate dateDeProspection) throws MyException {
+        if (dateDeProspection == null|| dateDeProspection.equals("")){
+            throw new MyException("Veuillez remplir le champ 'Date de Prospection'.");
+        }
 
        this.dateDeProspection=dateDeProspection;
     }
@@ -45,7 +48,10 @@ public class Prospect extends Societe  {
         return prospectInteresse;
     }
 
-    public void setProspectInteresse(String prospectInteresse) {
+    public void setProspectInteresse(String prospectInteresse) throws MyException {
+        if (prospectInteresse == null|| prospectInteresse.equals("")){
+            throw new MyException("Veuillez remplir le champ 'Interesse'.");
+        }
         this.prospectInteresse = prospectInteresse;
     }
 

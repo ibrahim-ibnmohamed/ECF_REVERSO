@@ -29,24 +29,30 @@ public class Client extends Societe {
         return chiffreDaffaire;
     }
 
-    public void setChiffreDaffaire(double chiffreDaffaire) throws MyException {
-        if (chiffreDaffaire<=200){
-            throw new MyException("Le chiffre d’affaires devra être renseigné et être supérieur à 200");
-
-        }else   this.chiffreDaffaire = chiffreDaffaire;
+    public void setChiffreDaffaire(Double chiffreDaffaire) throws MyException {
+        if (chiffreDaffaire == null || chiffreDaffaire.equals("")) {
+            throw new MyException("Le chiffre d’affaires doit être renseigné.");
+        }
+        if (chiffreDaffaire <= 200) {
+            throw new MyException("Le chiffre d’affaires doit être supérieur à 200.");
+        }
+        this.chiffreDaffaire = chiffreDaffaire;
     }
 
     public int getNombreEmployer() {
         return nombreEmployer;
     }
 
-    public void setNombreEmployer(int nombreEmployer) throws MyException {
-        if (nombreEmployer < 1){
-            throw new MyException("Le nombre d’employés devra être renseigné et être strictement supérieur à zéro");
-
-        }else
+    public void setNombreEmployer(Integer nombreEmployer) throws MyException {
+        if (nombreEmployer == null) {
+            throw new MyException("Le nombre d’employés doit être renseigné.");
+        }
+        if (nombreEmployer < 1) {
+            throw new MyException("Le nombre d’employés doit être strictement supérieur à zéro.");
+        }
         this.nombreEmployer = nombreEmployer;
     }
+
 
     @Override
     public String toString() {

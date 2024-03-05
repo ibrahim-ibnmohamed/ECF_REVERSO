@@ -1,7 +1,7 @@
 package vue;
 
-import controleur.ControleurAffichage;
-import controleur.ControleurFormulaire;
+import controleur.ControleurAccueil;
+import exception.ControleurExcpetion;
 import exception.MyException;
 import model.entite.Client;
 import model.entite.Prospect;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import static model.dao.DaoClient.findByName;
 
 public class Acceuil extends JDialog {
-    private ControleurFormulaire controleurFormulaire;
+
     private JPanel panel1;
     private JLabel lbTitre;
 
@@ -52,7 +52,7 @@ public class Acceuil extends JDialog {
                     case "Create":
 
                         try {
-                            ControleurFormulaire.init("createClient");
+                            ControleurAccueil.startFormulaire("createClient");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -60,16 +60,27 @@ public class Acceuil extends JDialog {
                         break;
                     case "Update":
                         try {
-                            ControleurFormulaire.init("updateClient");
+                            ControleurAccueil.selectClient();
+                                JOptionPane.showMessageDialog(Acceuil.this, "un vrai msg");
+                                ControleurAccueil.startFormulaire("updateClient");
+                                dispose();
+
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (ControleurExcpetion ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
                         }
-                        dispose();
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
+
+
+
                         break;
                     case "Delete":
                         try {
-                            ControleurFormulaire.init("deleteClient");
+                            ControleurAccueil.startFormulaire("deleteClient");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -78,7 +89,7 @@ public class Acceuil extends JDialog {
                         break;
                     case "Find" :
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        ControleurAffichage.init("client");
+                        ControleurAccueil.startAffichage("client");
                         dispose();
 
 
@@ -98,7 +109,7 @@ public class Acceuil extends JDialog {
                 switch (choixSelectionne) {
                     case "Create":
                         try {
-                            ControleurFormulaire.init("createProsecte");
+                            ControleurAccueil.startFormulaire("createProsecte");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -106,10 +117,12 @@ public class Acceuil extends JDialog {
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         break;
                     case "Update":
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         try {
-                            ControleurFormulaire.init("updateProspect");
-                            dispose();
+                            ControleurAccueil.selectProspect();
+                                JOptionPane.showMessageDialog(Acceuil.this, "vous avez choisi Update");
+                                ControleurAccueil.startFormulaire("updateProspect");
+                                dispose();
+
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -117,7 +130,7 @@ public class Acceuil extends JDialog {
                     case "Delete":
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         try {
-                            ControleurFormulaire.init("deleteProspect");
+                            ControleurAccueil.startFormulaire("deleteProspect");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -126,7 +139,7 @@ public class Acceuil extends JDialog {
                         break;
                     case "Find" :
                         JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        ControleurAffichage.init("procpect");
+                        ControleurAccueil.startAffichage("procpect");
 
                         dispose();
                     default:

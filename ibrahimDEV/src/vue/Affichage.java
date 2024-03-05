@@ -2,6 +2,8 @@ package vue;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import controleur.ControleurAffichage;
 import model.dao.DaoClient;
 import model.dao.DaoProspect;
 import model.entite.Client;
@@ -101,8 +103,7 @@ public class Affichage extends JDialog {
         btnAccueill.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Acceuil acceuil = new Acceuil();
-                acceuil.setVisible(true);
+                ControleurAffichage.startAccueil();
                 dispose();
             }
         });

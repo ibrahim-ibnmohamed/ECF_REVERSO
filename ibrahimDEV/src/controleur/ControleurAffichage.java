@@ -23,4 +23,7 @@ public class ControleurAffichage {
         }
         return clients;
     }
+    public static void startAccueil(){
+        ControleurAccueil.init();
+    }
 }
