@@ -22,7 +22,7 @@ public class Client extends Societe {
         this.setChiffreDaffaire(chiffreDaffaire);
         this.setNombreEmployer(nombreEmployer);
     }
-
+    public Client(){}
 
 
     public double getChiffreDaffaire() {

@@ -1,25 +1,30 @@
 package application;
 
 import controleur.ControleurAccueil;
+import exception.DaoException;
 import exception.MyException;
 import model.dao.DaoClient;
 import model.dao.DaoConnection;
 import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
+import utilitaires.FormatterLog;
+import utilitaires.MyLogger;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 
 
 public class Main {
     public Main() throws SQLException, IOException {
     }
 
-    public static void main(String[] args) throws MyException, SQLException, IOException {
+    public static void main(String[] args) throws MyException, SQLException, IOException, DaoException {
         String valeurUser = "mohamed "+"a"+"peur";
         System.out.println("SELECT " +
                 "ID_CLIENT, "+
@@ -46,7 +51,7 @@ public class Main {
                 "nancy", "google@hhh.com",
                 "le client est interesé",
                 date,
-                "yes");
+                "oui");
 
        // System.out.println(prospect1);
         Client client = new Client(2,
@@ -65,6 +70,11 @@ public class Main {
       //  prospect.setId(2); // ID du client à mettre à jour
       //  prospect.setRaisonSociale("PHP codeur");
       //  prospect.setNomDeRue("1 rue de chifre dix ");
+        FileHandler fh = new FileHandler("logReverso.log", true);
+        fh.setFormatter(new FormatterLog());
+        MyLogger.LOGGER.setUseParentHandlers(false);
+        MyLogger.LOGGER.addHandler(fh);
+        MyLogger.LOGGER.log(Level.INFO, "Début du programme");
 
         try {
             Connection connection = new DaoConnection().getConnection();
@@ -76,6 +86,7 @@ public class Main {
             }
         } catch (SQLException | IOException e) {
             System.err.println("Erreur de connexion à la base de données : " + e.getMessage());
+            MyLogger.LOGGER.log(Level.WARNING, "Problème de connexion à la base de données");
         }
 
 
@@ -89,7 +100,12 @@ public class Main {
         // DaoProspect.update(prospect);
 
 
+
+
+
         ControleurAccueil.init();
+
+        MyLogger.LOGGER.log(Level.INFO, "fin du programme");
 
      // Formulair formulair=new Formulair();
        // formulair.setVisible(true);

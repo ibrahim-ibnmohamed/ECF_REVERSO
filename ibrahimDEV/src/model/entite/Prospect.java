@@ -31,6 +31,7 @@ public class Prospect extends Societe  {
         this.setProspectInteresse(prospectInteresse);
         this.setDateDeProspection(dateDeProspection);
     }
+    public Prospect(){}
 
     public LocalDate getDateDeProspection() {
         return dateDeProspection;
@@ -51,6 +52,10 @@ public class Prospect extends Societe  {
     public void setProspectInteresse(String prospectInteresse) throws MyException {
         if (prospectInteresse == null|| prospectInteresse.equals("")){
             throw new MyException("Veuillez remplir le champ 'Interesse'.");
+        }
+        // Vérifier si la valeur est "oui" ou "non" (en ignorant la casse)
+        if (!prospectInteresse.equalsIgnoreCase("oui") && !prospectInteresse.equalsIgnoreCase("non")) {
+            throw new MyException("La valeur de 'Interesse' doit être 'oui' ou 'non'.");
         }
         this.prospectInteresse = prospectInteresse;
     }

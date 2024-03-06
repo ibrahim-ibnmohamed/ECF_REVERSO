@@ -5,7 +5,7 @@ import exception.MyException;
 
 import javax.swing.*;
 
-abstract class Societe  {
+public abstract class Societe  {
 
     private int id;
     private  String raisonSociale;
@@ -17,7 +17,7 @@ abstract class Societe  {
     private  String email;
     private  String commentaire;
 
-
+public Societe(){}
     public Societe(int id,
                    String raisonSociale,
                    String numeroDeRue,

@@ -4,6 +4,7 @@ package vue;
 import controleur.ControleurAccueil;
 import controleur.ControleurFormulaire;
 import exception.ControleurExcpetion;
+import exception.DaoException;
 import exception.MyException;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Formulair extends JDialog {
@@ -58,9 +60,7 @@ public class Formulair extends JDialog {
 
             case "createClient": {
                 // Ajout des composants au formulaire
-                lbId = new JLabel("ID Client:");
-                add(lbId);
-                add(tfId);
+
 
                 add(new JLabel("Raison Sociale:"));
                 add(tfRaisonSociale);
@@ -117,7 +117,7 @@ public class Formulair extends JDialog {
                         } else {
                             try {
 
-                            int id = Integer.parseInt(tfId.getText());
+
                             String raisonSociale = tfRaisonSociale.getText();
                             String nomDeRue = tfNomRue.getText();
                             String numDeRue = tfNumRue.getText();
@@ -130,7 +130,7 @@ public class Formulair extends JDialog {
                             int nombreEmployes = Integer.parseInt(tfNombreEmployes.getText());
 
 
-                                ControleurFormulaire.createClient(id, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
+                                ControleurFormulaire.createClient(0, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
                                 JOptionPane.showMessageDialog(null,"Client créé avec succès !");
 
                                ControleurFormulaire.startAccueil();
@@ -149,7 +149,10 @@ public class Formulair extends JDialog {
                             catch (NullPointerException NE){
                                 JOptionPane.showMessageDialog(null, "Annulé: " );
 
-                            };
+                            } catch (DaoException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            ;
 
 
                         }
@@ -257,6 +260,8 @@ public class Formulair extends JDialog {
                                 throw new RuntimeException(ex);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
+                            } catch (DaoException ex) {
+                                throw new RuntimeException(ex);
                             }
                             JOptionPane.showMessageDialog(null, "Client mis à jour avec succès !");
 
@@ -349,6 +354,8 @@ public class Formulair extends JDialog {
                                 throw new RuntimeException(ex);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
+                            } catch (DaoException ex) {
+                                throw new RuntimeException(ex);
                             }
                             JOptionPane.showMessageDialog(null, "Client supprimé avec succès !");
                             ControleurFormulaire.startAccueil();
@@ -366,6 +373,8 @@ public class Formulair extends JDialog {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (DaoException e) {
+                    throw new RuntimeException(e);
                 }
 
                 btnAccueil.addActionListener(new ActionListener() {
@@ -383,9 +392,7 @@ public class Formulair extends JDialog {
 
 
                 // Ajout des composants au formulaire
-                lbId = new JLabel("ID Prospect:");
-                add(lbId);
-                add(tfId);
+
 
                 add(new JLabel("Raison Sociale:"));
                 add(tfRaisonSociale);
@@ -442,7 +449,7 @@ public class Formulair extends JDialog {
                         } else {
 
                             try {
-                            int id = Integer.parseInt(tfId.getText());
+
                             String raisonSociale = tfRaisonSociale.getText();
                             String nomDeRue = tfNomRue.getText();
                             String numDeRue = tfNumRue.getText();
@@ -454,7 +461,7 @@ public class Formulair extends JDialog {
                             String dateDeProspection = tfDateDeProspection.getText();
                             String prospectInteresse = tfProspectInteresse.getText();
 
-                                ControleurFormulaire.createProspect(id, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
+                                ControleurFormulaire.createProspect(1, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
                                 JOptionPane.showMessageDialog(null, "Prospect créé avec succès !");
 
                                 ControleurFormulaire.startAccueil();
@@ -475,7 +482,10 @@ public class Formulair extends JDialog {
                             catch (NullPointerException NE){
                                 JOptionPane.showMessageDialog(null, "Annulé: " );
 
-                            };
+                            } catch (DaoException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            ;
 
                         }
 
@@ -546,7 +556,8 @@ public class Formulair extends JDialog {
                 tfVille.setText(ControleurFormulaire.prospectVise.getVille());
                 tfTelephone.setText(ControleurFormulaire.prospectVise.getTelephone());
                 tfEmail.setText(ControleurFormulaire.prospectVise.getemail());
-                tfDateDeProspection.setText(ControleurFormulaire.prospectVise.getDateDeProspection().toString());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                tfDateDeProspection.setText(ControleurFormulaire.prospectVise.getDateDeProspection().format(formatter));
                 tfProspectInteresse.setText(ControleurFormulaire.prospectVise.getProspectInteresse());
                 tfCommentaire.setText(ControleurFormulaire.prospectVise.getCommentaire());
 
@@ -584,7 +595,10 @@ public class Formulair extends JDialog {
                         catch (NullPointerException NE){
                             JOptionPane.showMessageDialog(null, "Annulé: " );
 
-                        };
+                        } catch (DaoException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        ;
                         ControleurFormulaire.startAccueil();
                         dispose();
                     }
@@ -686,8 +700,10 @@ public class Formulair extends JDialog {
                         }
                         catch (NullPointerException NE){
                             JOptionPane.showMessageDialog(null, "Annulé: " );
-                        }
-                        JOptionPane.showMessageDialog(null, "Prospect supprimé avec succès !");
+                        } catch (DaoException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            JOptionPane.showMessageDialog(null, "Prospect supprimé avec succès !");
                            ControleurFormulaire.startAccueil();
                             dispose();
                         }

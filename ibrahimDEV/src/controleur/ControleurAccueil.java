@@ -1,6 +1,7 @@
 package controleur;
 
 import exception.ControleurExcpetion;
+import exception.DaoException;
 import exception.MyException;
 import model.dao.DaoClient;
 import model.dao.DaoProspect;
@@ -32,7 +33,7 @@ public class ControleurAccueil {
 
     //---------------------select-----------
 
-    public static  void selectClient() throws MyException, SQLException, IOException, ControleurExcpetion {
+    public static  void selectClient() throws MyException, SQLException, IOException, ControleurExcpetion, DaoException {
 
         ArrayList<Client> clients = null;
 
@@ -78,6 +79,8 @@ public class ControleurAccueil {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des prospects : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
         }
 
         // Vérifier si la liste des prospects est vide

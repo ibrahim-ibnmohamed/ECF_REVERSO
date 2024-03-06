@@ -2,6 +2,7 @@ package vue;
 
 import controleur.ControleurAccueil;
 import exception.ControleurExcpetion;
+import exception.DaoException;
 import exception.MyException;
 import model.entite.Client;
 import model.entite.Prospect;
@@ -32,7 +33,7 @@ public class Acceuil extends JDialog {
         setLocationRelativeTo(null);
 
         clientBtnCombo.addActionListener(new ActionListener() {
-            Client client = null;
+
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,6 +46,8 @@ public class Acceuil extends JDialog {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 } catch (MyException ex) {
+                    throw new RuntimeException(ex);
+                } catch (DaoException ex) {
                     throw new RuntimeException(ex);
                 }
 
@@ -73,8 +76,9 @@ public class Acceuil extends JDialog {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
+                        } catch (DaoException ex) {
+                            throw new RuntimeException(ex);
                         }
-
 
 
                         break;
