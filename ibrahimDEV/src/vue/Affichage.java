@@ -2,17 +2,18 @@ package vue;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import controleur.ControleurAffichage;
-import model.dao.DaoClient;
-import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
+
+/**
+ * Cette classe représente une fenêtre d'affichage des clients ou des prospects.
+ */
 public class Affichage extends JDialog {
     private JLabel lbTitre;
     private JTable tAffichage;
@@ -20,6 +21,11 @@ public class Affichage extends JDialog {
     private JScrollPane jsScrol;
     private JPanel panelAffichage;
 
+
+    /**
+     * Constructeur de la classe Affichage.
+     * @param choix Le choix entre l'affichage des clients ou des prospects.
+     */
     public Affichage(String choix) {
 
         setTitle("la liste des " + " " + choix + "s");
@@ -31,7 +37,7 @@ public class Affichage extends JDialog {
 
         if (choix.equals("client")) {
             try {
-                ArrayList<Client> liste = DaoClient.findAll();
+                ArrayList<Client> liste = ControleurAffichage.findAllClient();
 
                 Object[][] data = new Object[liste.size()][11];
                 for (int i = 0; i < liste.size(); i++) {
@@ -59,13 +65,13 @@ public class Affichage extends JDialog {
                 tAffichage.setVisible(true);
 
             } catch (Exception e) {
-                e.printStackTrace(); // Gérer les exceptions de manière appropriée
+                JOptionPane.showMessageDialog(null, "un problème survient lors de l'affichage des clients.");
             }
 
         } else if (choix.equals("procpect")) {
 
             try {
-                ArrayList<Prospect> liste = DaoProspect.findAll();
+                ArrayList<Prospect> liste = ControleurAffichage.findAllProspect();
 
                 Object[][] data = new Object[liste.size()][11];
                 for (int i = 0; i < liste.size(); i++) {
@@ -93,7 +99,7 @@ public class Affichage extends JDialog {
                 tAffichage.setVisible(true);
 
             } catch (Exception e) {
-                e.printStackTrace(); // Gérer les exceptions de manière appropriée
+                JOptionPane.showMessageDialog(null, "un problème survient lors de l'affichage des prospects.");
 
 
             }

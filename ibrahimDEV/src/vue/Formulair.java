@@ -1,7 +1,6 @@
 package vue;
 
 
-import controleur.ControleurAccueil;
 import controleur.ControleurFormulaire;
 import exception.ControleurExcpetion;
 import exception.DaoException;
@@ -12,11 +11,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Cette classe représente une fenêtre de formulaire pour créer, mettre à jour ou supprimer un client ou un prospect.
+ */
 public class Formulair extends JDialog {
     private JTextField tfId;
     private JTextField tfCommentaire;
@@ -35,9 +37,12 @@ public class Formulair extends JDialog {
     private JTextField tfProspectInteresse;
     private JButton btnValider;
     private JButton btnAccueil;
-    private JComboBox<String> clientComboBox;
 
-
+    /**
+     * Constructeur de la classe Formulaire.
+     *
+     * @param choix Le choix de l'action à effectuer sur le client (création, mise à jour, suppression).
+     */
     public Formulair(String choix) {
         setTitle("Formulaire " + " " + choix + "s");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,7 +50,6 @@ public class Formulair extends JDialog {
         setSize(800, 800);
         setLocationRelativeTo(null);
         setVisible(true);
-
 
 
         btnAccueil.addActionListener(new ActionListener() {
@@ -118,22 +122,22 @@ public class Formulair extends JDialog {
                             try {
 
 
-                            String raisonSociale = tfRaisonSociale.getText();
-                            String nomDeRue = tfNomRue.getText();
-                            String numDeRue = tfNumRue.getText();
-                            String codePostale = tfCodePostal.getText();
-                            String telephone = tfTelephone.getText();
-                            String ville = tfVille.getText();
-                            String email = tfEmail.getText();
-                            String commentaire = tfCommentaire.getText();
-                            double chiffreAffaire = Double.parseDouble(tfChiffreAffaire.getText());
-                            int nombreEmployes = Integer.parseInt(tfNombreEmployes.getText());
+                                String raisonSociale = tfRaisonSociale.getText();
+                                String nomDeRue = tfNomRue.getText();
+                                String numDeRue = tfNumRue.getText();
+                                String codePostale = tfCodePostal.getText();
+                                String telephone = tfTelephone.getText();
+                                String ville = tfVille.getText();
+                                String email = tfEmail.getText();
+                                String commentaire = tfCommentaire.getText();
+                                double chiffreAffaire = Double.parseDouble(tfChiffreAffaire.getText());
+                                int nombreEmployes = Integer.parseInt(tfNombreEmployes.getText());
 
 
                                 ControleurFormulaire.createClient(0, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
-                                JOptionPane.showMessageDialog(null,"Client créé avec succès !");
+                                JOptionPane.showMessageDialog(null, "Client créé avec succès !");
 
-                               ControleurFormulaire.startAccueil();
+                                ControleurFormulaire.startAccueil();
                                 dispose();
 
                             } catch (MyException ex) {
@@ -142,12 +146,10 @@ public class Formulair extends JDialog {
                                 throw new RuntimeException(ex);
                             } catch (IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            }
-                            catch (NumberFormatException Nf){
-                                    JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            }
-                            catch (NullPointerException NE){
-                                JOptionPane.showMessageDialog(null, "Annulé: " );
+                            } catch (NumberFormatException Nf) {
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            } catch (NullPointerException NE) {
+                                JOptionPane.showMessageDialog(null, "Annulé: ");
 
                             } catch (DaoException ex) {
                                 throw new RuntimeException(ex);
@@ -169,7 +171,7 @@ public class Formulair extends JDialog {
 
             }
 
-           break;
+            break;
 
             case "updateClient": {
                 // Ajout des composants au formulaire
@@ -214,12 +216,12 @@ public class Formulair extends JDialog {
                 add(btnAccueil);
 
 
-                if (ControleurFormulaire.clientVise==null) {
+                if (ControleurFormulaire.clientVise == null) {
                     JOptionPane.showMessageDialog(null, "Annulé: ");
                     ControleurFormulaire.startAccueil();
                     dispose();
 
-                }else {
+                } else {
 
 
                     // Met à jour les champs du formulaire avec les informations du client
@@ -268,7 +270,7 @@ public class Formulair extends JDialog {
                             ControleurFormulaire.startAccueil();
                             dispose();
                         }
-                        });
+                    });
                 }
 
 
@@ -327,44 +329,45 @@ public class Formulair extends JDialog {
                 try {
                     ControleurFormulaire.choixClient();
 
-                // Met à jour les champs du formulaire avec les informations du client
-                tfId.setText(Integer.toString(ControleurFormulaire.clientVise.getId()));
-                tfId.setEnabled(false);
-                tfRaisonSociale.setText(ControleurFormulaire.clientVise.getRaisonSociale());
-                tfNomRue.setText(ControleurFormulaire.clientVise.getNomDeRue());
-                tfNumRue.setText(ControleurFormulaire.clientVise.getNumeroDeRue());
-                tfCodePostal.setText(ControleurFormulaire.clientVise.getCodePostal());
-                tfVille.setText(ControleurFormulaire.clientVise.getVille());
-                tfTelephone.setText(ControleurFormulaire.clientVise.getTelephone());
-                tfEmail.setText(ControleurFormulaire.clientVise.getemail());
-                tfChiffreAffaire.setText(Double.toString(ControleurFormulaire.clientVise.getChiffreDaffaire()));
-                tfNombreEmployes.setText(Integer.toString(ControleurFormulaire.clientVise.getNombreEmployer()));
-                tfCommentaire.setText(ControleurFormulaire.clientVise.getCommentaire());
+                    // Met à jour les champs du formulaire avec les informations du client
+                    tfId.setText(Integer.toString(ControleurFormulaire.clientVise.getId()));
+                    tfId.setEnabled(false);
+                    tfRaisonSociale.setText(ControleurFormulaire.clientVise.getRaisonSociale());
+                    tfNomRue.setText(ControleurFormulaire.clientVise.getNomDeRue());
+                    tfNumRue.setText(ControleurFormulaire.clientVise.getNumeroDeRue());
+                    tfCodePostal.setText(ControleurFormulaire.clientVise.getCodePostal());
+                    tfVille.setText(ControleurFormulaire.clientVise.getVille());
+                    tfTelephone.setText(ControleurFormulaire.clientVise.getTelephone());
+                    tfEmail.setText(ControleurFormulaire.clientVise.getemail());
+                    tfChiffreAffaire.setText(Double.toString(ControleurFormulaire.clientVise.getChiffreDaffaire()));
+                    tfNombreEmployes.setText(Integer.toString(ControleurFormulaire.clientVise.getNombreEmployer()));
+                    tfCommentaire.setText(ControleurFormulaire.clientVise.getCommentaire());
 
-                btnValider.setText("Supprimer");
-                btnValider.addActionListener(new ActionListener() {
-                    @Override public void actionPerformed(ActionEvent e) {
-                        int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Client ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
-                        if (confirmDelete == JOptionPane.YES_OPTION) {
-                            try {
-                                ControleurFormulaire.deleteClient(ControleurFormulaire.clientVise);
-                            } catch (MyException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (DaoException ex) {
-                                throw new RuntimeException(ex);
+                    btnValider.setText("Supprimer");
+                    btnValider.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Client ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+                            if (confirmDelete == JOptionPane.YES_OPTION) {
+                                try {
+                                    ControleurFormulaire.deleteClient(ControleurFormulaire.clientVise);
+                                } catch (MyException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (SQLException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (DaoException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                                JOptionPane.showMessageDialog(null, "Client supprimé avec succès !");
+                                ControleurFormulaire.startAccueil();
+                                dispose();
                             }
-                            JOptionPane.showMessageDialog(null, "Client supprimé avec succès !");
-                            ControleurFormulaire.startAccueil();
-                            dispose();
                         }
-                    }
 
-                });
-                }catch (ControleurExcpetion ce){
+                    });
+                } catch (ControleurExcpetion ce) {
                     JOptionPane.showMessageDialog(null, ce.getMessage());
 
                 } catch (MyException e) {
@@ -380,7 +383,7 @@ public class Formulair extends JDialog {
                 btnAccueil.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       ControleurFormulaire.startAccueil();
+                        ControleurFormulaire.startAccueil();
                         dispose();
 
                     }
@@ -450,16 +453,16 @@ public class Formulair extends JDialog {
 
                             try {
 
-                            String raisonSociale = tfRaisonSociale.getText();
-                            String nomDeRue = tfNomRue.getText();
-                            String numDeRue = tfNumRue.getText();
-                            String codePostale = tfCodePostal.getText();
-                            String telephone = tfTelephone.getText();
-                            String ville = tfVille.getText();
-                            String email = tfEmail.getText();
-                            String commentaire = tfCommentaire.getText();
-                            String dateDeProspection = tfDateDeProspection.getText();
-                            String prospectInteresse = tfProspectInteresse.getText();
+                                String raisonSociale = tfRaisonSociale.getText();
+                                String nomDeRue = tfNomRue.getText();
+                                String numDeRue = tfNumRue.getText();
+                                String codePostale = tfCodePostal.getText();
+                                String telephone = tfTelephone.getText();
+                                String ville = tfVille.getText();
+                                String email = tfEmail.getText();
+                                String commentaire = tfCommentaire.getText();
+                                String dateDeProspection = tfDateDeProspection.getText();
+                                String prospectInteresse = tfProspectInteresse.getText();
 
                                 ControleurFormulaire.createProspect(1, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
                                 JOptionPane.showMessageDialog(null, "Prospect créé avec succès !");
@@ -474,13 +477,12 @@ public class Formulair extends JDialog {
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
 
-                            }catch (DateTimeParseException De){
+                            } catch (DateTimeParseException De) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Le date n'est pas correct, il doit respecter le format jj/mm/aaaa", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            }catch (NumberFormatException Nf){
+                            } catch (NumberFormatException Nf) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            }
-                            catch (NullPointerException NE){
-                                JOptionPane.showMessageDialog(null, "Annulé: " );
+                            } catch (NullPointerException NE) {
+                                JOptionPane.showMessageDialog(null, "Annulé: ");
 
                             } catch (DaoException ex) {
                                 throw new RuntimeException(ex);
@@ -579,7 +581,7 @@ public class Formulair extends JDialog {
                         try {
                             ControleurFormulaire.updateProspect(id, raisonSociale, numDeRue, nomDeRue, codePostale,
                                     telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
-                            JOptionPane.showMessageDialog(null,"Prospect mis à jour avec succès !");
+                            JOptionPane.showMessageDialog(null, "Prospect mis à jour avec succès !");
                         } catch (MyException ex) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                         } catch (SQLException ex) {
@@ -587,13 +589,12 @@ public class Formulair extends JDialog {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
 
-                        }catch (DateTimeParseException De){
+                        } catch (DateTimeParseException De) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Le date n'est pas correct, il doit respecter le format jj/mm/aaaa", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        }catch (NumberFormatException Nf){
+                        } catch (NumberFormatException Nf) {
                             JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        }
-                        catch (NullPointerException NE){
-                            JOptionPane.showMessageDialog(null, "Annulé: " );
+                        } catch (NullPointerException NE) {
+                            JOptionPane.showMessageDialog(null, "Annulé: ");
 
                         } catch (DaoException ex) {
                             throw new RuntimeException(ex);
@@ -657,7 +658,7 @@ public class Formulair extends JDialog {
 
                 btnAccueil = new JButton("Accueil");
                 add(btnAccueil);
-                try{
+                try {
                     ControleurFormulaire.choixProspect();
                 } catch (MyException e) {
                     throw new RuntimeException(e);
@@ -688,23 +689,22 @@ public class Formulair extends JDialog {
                         if (confirmDelete == JOptionPane.YES_OPTION) {
 
                             try {
-                            ControleurFormulaire.deleteProspect(ControleurFormulaire.prospectVise);
+                                ControleurFormulaire.deleteProspect(ControleurFormulaire.prospectVise);
 
 
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        catch (NullPointerException NE){
-                            JOptionPane.showMessageDialog(null, "Annulé: " );
-                        } catch (DaoException ex) {
+                            } catch (MyException ex) {
+                                throw new RuntimeException(ex);
+                            } catch (SQLException ex) {
+                                throw new RuntimeException(ex);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            } catch (NullPointerException NE) {
+                                JOptionPane.showMessageDialog(null, "Annulé: ");
+                            } catch (DaoException ex) {
                                 throw new RuntimeException(ex);
                             }
                             JOptionPane.showMessageDialog(null, "Prospect supprimé avec succès !");
-                           ControleurFormulaire.startAccueil();
+                            ControleurFormulaire.startAccueil();
                             dispose();
                         }
                     }
@@ -721,53 +721,5 @@ public class Formulair extends JDialog {
             break;
             default:
         }
-    }
-
-    public void addValiderListener (ActionListener listener){
-                btnValider.addActionListener(listener);
-            }
-
-    public JTextField getTfId() {
-        return tfId;
-    }
-
-    public JTextField getTfRaisonSociale() {
-        return tfRaisonSociale;
-    }
-
-    public JTextField getTfNomRue() {
-        return tfNomRue;
-    }
-
-    public JTextField getTfNumRue() {
-        return tfNumRue;
-    }
-
-    public JTextField getTfCodePostal() {
-        return tfCodePostal;
-    }
-
-    public JTextField getTfVille() {
-        return tfVille;
-    }
-
-    public JTextField getTfTelephone() {
-        return tfTelephone;
-    }
-
-    public JTextField getTfEmail() {
-        return tfEmail;
-    }
-
-    public JTextField getTfChiffreAffaire() {
-        return tfChiffreAffaire;
-    }
-
-    public JTextField getTfNombreEmployes() {
-        return tfNombreEmployes;
-    }
-
-    public JTextField getTfCommentaire() {
-        return tfCommentaire;
     }
 }

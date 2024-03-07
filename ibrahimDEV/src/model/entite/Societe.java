@@ -3,8 +3,10 @@ package model.entite;
 
 import exception.MyException;
 
-import javax.swing.*;
-
+/**
+ * Représente une société avec ses informations de base telles que la raison sociale, l'adresse, etc.
+ * Cette classe est abstraite et ne peut donc pas être instanciée directement.
+ */
 public abstract class Societe  {
 
     private int id;
@@ -17,7 +19,26 @@ public abstract class Societe  {
     private  String email;
     private  String commentaire;
 
+    /**
+     * Constructeur par défaut.
+     */
+
 public Societe(){}
+
+    /**
+     * Constructeur pour initialiser une société avec les informations spécifiées.
+     *
+     * @param id               L'identifiant de la société.
+     * @param raisonSociale    La raison sociale de la société.
+     * @param numeroDeRue      Le numéro de rue de la société.
+     * @param nomDeRue         Le nom de la rue de la société.
+     * @param codePostal       Le code postal de la société.
+     * @param telephone        Le numéro de téléphone de la société.
+     * @param ville            La ville de la société.
+     * @param email            L'adresse e-mail de la société.
+     * @param commentaire      Un commentaire sur la société.
+     * @throws MyException Si une erreur survient lors de la validation des données.
+     */
     public Societe(int id,
                    String raisonSociale,
                    String numeroDeRue,

@@ -8,53 +8,67 @@ import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
 import vue.Formulair;
-import vue.FormulairProspect;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
-
+/**
+ * Le contrôleur pour la gestion des formulaires dans l'application.
+ */
 public class ControleurFormulaire {
 
-
-
-    public static void init(String choix) throws MyException {
-        Formulair formulair= new Formulair(choix);
-        formulair.setVisible(true);
-
+    /**
+     * Initialise le formulaire avec le choix spécifié.
+     *
+     * @param choix le choix spécifié pour le formulaire.
+     */
+    public static void init(String choix) {
+        Formulair formulaire = new Formulair(choix);
+        formulaire.setVisible(true);
     }
 
-    public static void startAccueil(){
+    /**
+     * Démarre l'interface d'accueil.
+     */
+    public static void startAccueil() {
         ControleurAccueil.init();
-
     }
 
+    /**
+     * Permet de choisir un client.
+     *
+     * @throws MyException si une exception générale se produit.
+     * @throws SQLException si une erreur SQL se produit lors de l'accès à la base de données.
+     * @throws ControleurExcpetion si une exception spécifique au contrôleur se produit.
+     * @throws IOException si une erreur d'entrée/sortie se produit.
+     * @throws DaoException si une erreur DAO se produit.
+     */
     public static void choixClient() throws MyException, SQLException, ControleurExcpetion, IOException, DaoException {
         ControleurAccueil.selectClient();
     }
+
+    /**
+     * Permet de choisir un prospect.
+     *
+     * @throws MyException si une exception générale se produit.
+     */
     public static void choixProspect() throws MyException {
         ControleurAccueil.selectProspect();
     }
-
-    private static Formulair vueClient;
-    private FormulairProspect vueProspect;
-    public static Client clientVise ;
-    public static Prospect prospectVise ;
+    public static Client clientVise;
+    public static Prospect prospectVise;
 
     //---------------------Create-----------
     public static void createClient(int idClient, String raisonSociale, String numRue, String nomRue,
                                     String codePostal, String telephone, String ville, String email,
                                     String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws MyException, SQLException, IOException, NullPointerException, DaoException {
 
-            double chiffreAffaire = chiffreAffaireStr;
-            int nombreEmployes = nombreEmployesStr;
 
-            Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
-            DaoClient.create(client);
+
+        Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email, commentaire, chiffreAffaireStr, nombreEmployesStr);
+        DaoClient.create(client);
     }
 
     public static void createProspect(int idProspect,
@@ -73,48 +87,42 @@ public class ControleurFormulaire {
             SQLException,
             IOException,
             NullPointerException, DaoException {
-        System.out.println("createProspect appelé");
 
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dateProspection = LocalDate.parse(dateDeProspection, formatter);
-            Prospect prospect = new Prospect(idProspect, raisonSociale, nomDeRue, numDeRue, codePostal, telephone,
-                    ville, email, commentaire, dateProspection, prospectInteresse);
-            DaoProspect.create(prospect);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateProspection = LocalDate.parse(dateDeProspection, formatter);
+        Prospect prospect = new Prospect(idProspect, raisonSociale, nomDeRue, numDeRue, codePostal, telephone,
+                ville, email, commentaire, dateProspection, prospectInteresse);
+        DaoProspect.create(prospect);
     }
 
     //-------------------------------Update-----------------------
-    public static void updateClient( int idClient,String
-            raisonSociale,String numRue,String nomRue,
-                                     String codePostal,
-                                     String telephone,
-                                     String ville,
-                                     String email,
-                                     String commentaire,
-                                     double chiffreAffaireStr,
-                                     int nombreEmployesStr) throws MyException, SQLException, IOException, NullPointerException, DaoException {
+    public static void updateClient(int idClient, String raisonSociale, String numRue, String nomRue,
+                                    String codePostal, String telephone, String ville, String email,
+                                    String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws MyException, SQLException, IOException, NullPointerException, DaoException {
 
-            double chiffreAffaire = Double.parseDouble(String.valueOf(chiffreAffaireStr));
-            int nombreEmployes = Integer.parseInt(String.valueOf(nombreEmployesStr));
+        double chiffreAffaire = Double.parseDouble(String.valueOf(chiffreAffaireStr));
+        int nombreEmployes = Integer.parseInt(String.valueOf(nombreEmployesStr));
 
-            Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email,
-                    commentaire, chiffreAffaire, nombreEmployes);
-            DaoClient.update(client);
-            clientVise = null;
+        Client client = new Client(idClient, raisonSociale, numRue, nomRue, codePostal, telephone, ville, email,
+                commentaire, chiffreAffaire, nombreEmployes);
+        DaoClient.update(client);
+        clientVise = null;
     }
+
     public static void updateProspect(int idProspect, String raisonSociale, String numRue, String nomRue,
                                       String codePostal, String telephone, String ville, String email, String commentaire,
-                                      String dateDeProspectionStr, String prospectInteresseStr) throws MyException,
+                                      String dateDeProspectionStr, String prospectInteresse) throws MyException,
             SQLException, IOException, NullPointerException, DaoException {
 
-             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dateDeProspection = LocalDate.parse(dateDeProspectionStr,formatter);
-            String prospectInteresse = (prospectInteresseStr);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateDeProspection = LocalDate.parse(dateDeProspectionStr, formatter);
 
-            Prospect prospect = new Prospect(idProspect, raisonSociale, numRue, nomRue, codePostal, telephone, ville,
-                    email, commentaire, dateDeProspection, prospectInteresse);
-            DaoProspect.update(prospect);
+
+        Prospect prospect = new Prospect(idProspect, raisonSociale, numRue, nomRue, codePostal, telephone, ville,
+                email, commentaire, dateDeProspection, prospectInteresse);
+        DaoProspect.update(prospect);
     }
+
     //-------------------------------Delete-----------------------
     public static void deleteClient(Client clientVise) throws MyException, SQLException, IOException, NullPointerException, DaoException {
 
@@ -123,6 +131,6 @@ public class ControleurFormulaire {
 
     public static void deleteProspect(Prospect prospectVise) throws MyException, SQLException, IOException, NullPointerException, DaoException {
 
-        DaoProspect.delete(ControleurFormulaire.prospectVise.getId());
+        DaoProspect.delete(prospectVise.getId());
     }
 }

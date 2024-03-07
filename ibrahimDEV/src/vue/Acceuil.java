@@ -4,58 +4,57 @@ import controleur.ControleurAccueil;
 import exception.ControleurExcpetion;
 import exception.DaoException;
 import exception.MyException;
-import model.entite.Client;
-import model.entite.Prospect;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import static model.dao.DaoClient.findByName;
+
+
+/**
+ * Cette classe représente la fenêtre d'accueil de l'application.
+ * Elle permet à l'utilisateur de choisir différentes actions à effectuer
+ * concernant les clients et les prospects.
+ */
+
 
 public class Acceuil extends JDialog {
 
-    private JPanel panel1;
-    private JLabel lbTitre;
+    private JPanel panel1;// Panel principal de la fenêtre
+    private JLabel lbTitre; // Titre de la fenêtre
 
+
+    // Boutons déroulants pour les actions sur les clients et les prospects
     private JComboBox<String> clientBtnCombo;
     private JComboBox<String> prospectBtnCombo;
-    private ArrayList<Client> clients;
 
+    /**
+     * Constructeur de la classe Acceuil.
+     * Initialise la fenêtre et ses composants.
+     */
     public Acceuil() {
+        // Configuration de la fenêtre
         setTitle("Accueil");
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 800);
         setLocationRelativeTo(null);
 
+
+        // Action listener pour le bouton déroulant des actions sur les clients
         clientBtnCombo.addActionListener(new ActionListener() {
-
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 String choixSelectionne = (String) clientBtnCombo.getSelectedItem();
-                Client selectedClient = null;
-                try {
-                    selectedClient = findByName(choixSelectionne);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (MyException ex) {
-                    throw new RuntimeException(ex);
-                } catch (DaoException ex) {
-                    throw new RuntimeException(ex);
-                }
 
+                // Traitement selon l'action sélectionnée
                 switch (choixSelectionne) {
                     case "Create":
 
                         try {
                             ControleurAccueil.startFormulaire("createClient");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -64,7 +63,7 @@ public class Acceuil extends JDialog {
                     case "Update":
                         try {
                             ControleurAccueil.selectClient();
-                                JOptionPane.showMessageDialog(Acceuil.this, "un vrai msg");
+                                JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
                                 ControleurAccueil.startFormulaire("updateClient");
                                 dispose();
 
@@ -79,46 +78,55 @@ public class Acceuil extends JDialog {
                         } catch (DaoException ex) {
                             throw new RuntimeException(ex);
                         }
-
-
                         break;
                     case "Delete":
                         try {
                             ControleurAccueil.startFormulaire("deleteClient");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         dispose();
                         break;
                     case "Find" :
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        ControleurAccueil.startAffichage("client");
+
+                        try {
+                            ControleurAccueil.startAffichage("client");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (DaoException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         dispose();
-
-
                     default:
                         break;
                 }
             }
         });
-
+        // Action listener pour le bouton déroulant des actions sur les prospects
         prospectBtnCombo.addActionListener(new ActionListener() {
-            Prospect prospect = null;
+
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 String choixSelectionne = (String) prospectBtnCombo.getSelectedItem();
+                // Traitement selon l'action sélectionnée
 
                 switch (choixSelectionne) {
                     case "Create":
                         try {
                             ControleurAccueil.startFormulaire("createProsecte");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
                         dispose();
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
+
                         break;
                     case "Update":
                         try {
@@ -132,9 +140,10 @@ public class Acceuil extends JDialog {
                         }
                         break;
                     case "Delete":
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
+
                         try {
                             ControleurAccueil.startFormulaire("deleteProspect");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
                         } catch (MyException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -142,8 +151,19 @@ public class Acceuil extends JDialog {
                         dispose();
                         break;
                     case "Find" :
-                        JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        ControleurAccueil.startAffichage("procpect");
+
+                        try {
+                            ControleurAccueil.startAffichage("procpect");
+                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
+                        } catch (MyException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (DaoException ex) {
+                            throw new RuntimeException(ex);
+                        }
 
                         dispose();
                     default:
@@ -152,10 +172,13 @@ public class Acceuil extends JDialog {
             }
         });
     }
-
+    /**
+     * Méthode appelée pour créer les composants de l'interface utilisateur.
+     * Dans ce cas, elle crée un panel et deux boutons déroulants.
+     */
     private void createUIComponents() {
-        panel1 = new JPanel();
-        clientBtnCombo = new JComboBox<>();
-        prospectBtnCombo = new JComboBox<>();
+        panel1 = new JPanel();// Création du panel principal
+        clientBtnCombo = new JComboBox<>();// Création du bouton déroulant pour les actions sur les clients
+        prospectBtnCombo = new JComboBox<>();// Création du bouton déroulant pour les actions sur les prospects
     }
 }
