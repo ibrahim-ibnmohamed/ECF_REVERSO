@@ -422,9 +422,11 @@ public class Formulair extends JDialog {
                 tfDateDeProspection = new JTextField(); // Initialisation du champ de texte pour la date de prospection
                 add(tfDateDeProspection);
 
-                add(new JLabel("ProspectInteresse:"));
-                tfProspectInteresse = new JTextField(); // Initialisation du champ de texte pour l'intérêt du prospect
-                add(tfProspectInteresse);
+                add(new JLabel("ProspectIntéressé:"));
+                String[] options = {"oui", "non"};
+                JComboBox<String> prospectInteresseComboBox = new JComboBox<>(options);
+                add(prospectInteresseComboBox);
+
 
                 add(new JLabel("Commentaire:"));
                 add(tfCommentaire);
@@ -446,9 +448,8 @@ public class Formulair extends JDialog {
                                 tfVille.getText().isEmpty() ||
                                 tfEmail.getText().isEmpty() ||
                                 tfDateDeProspection.getText().isEmpty() ||
-                                tfProspectInteresse.getText().isEmpty()) {
-                            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs.");
-
+                                prospectInteresseComboBox.getSelectedIndex() == -1) {
+                            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs et sélectionner une option pour l'intérêt du prospect.");
                         } else {
 
                             try {
@@ -462,7 +463,7 @@ public class Formulair extends JDialog {
                                 String email = tfEmail.getText();
                                 String commentaire = tfCommentaire.getText();
                                 String dateDeProspection = tfDateDeProspection.getText();
-                                String prospectInteresse = tfProspectInteresse.getText();
+                                String prospectInteresse = (String) prospectInteresseComboBox.getSelectedItem(); // Obtenez la valeur sélectionnée dans la liste déroulante
 
                                 ControleurFormulaire.createProspect(1, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
                                 JOptionPane.showMessageDialog(null, "Prospect créé avec succès !");
@@ -534,9 +535,10 @@ public class Formulair extends JDialog {
                 tfDateDeProspection = new JTextField(); // Initialisation du champ de texte pour la date de prospection
                 add(tfDateDeProspection);
 
-                add(new JLabel("ProspectInteresse:"));
-                tfProspectInteresse = new JTextField(); // Initialisation du champ de texte pour l'intérêt du prospect
-                add(tfProspectInteresse);
+                add(new JLabel("ProspectIntéressé:"));
+                String[] options = {"oui", "non"};
+                JComboBox<String> prospectInteresseComboBox = new JComboBox<>(options);
+                add(prospectInteresseComboBox);
 
                 add(new JLabel("Commentaire:"));
                 add(tfCommentaire);
@@ -560,7 +562,8 @@ public class Formulair extends JDialog {
                 tfEmail.setText(ControleurFormulaire.prospectVise.getemail());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 tfDateDeProspection.setText(ControleurFormulaire.prospectVise.getDateDeProspection().format(formatter));
-                tfProspectInteresse.setText(ControleurFormulaire.prospectVise.getProspectInteresse());
+                prospectInteresseComboBox.setSelectedItem(ControleurFormulaire.prospectVise.getProspectInteresse());
+
                 tfCommentaire.setText(ControleurFormulaire.prospectVise.getCommentaire());
 
                 btnValider.addActionListener(new ActionListener() {
@@ -576,7 +579,7 @@ public class Formulair extends JDialog {
                         String email = tfEmail.getText();
                         String commentaire = tfCommentaire.getText();
                         String dateDeProspection = tfDateDeProspection.getText();
-                        String prospectInteresse = tfProspectInteresse.getText();
+                        String prospectInteresse = (String) prospectInteresseComboBox.getSelectedItem(); // Obtenez la valeur sélectionnée dans la liste déroulante
 
                         try {
                             ControleurFormulaire.updateProspect(id, raisonSociale, numDeRue, nomDeRue, codePostale,
