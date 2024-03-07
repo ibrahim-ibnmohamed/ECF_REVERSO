@@ -1,0 +1,124 @@
+06/03/2024 08:34:38 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:36:11 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:36:11 Level : INFO / Message : probleme de conection de BDD  / Méthode : main / Classe : application.Main
+06/03/2024 08:36:22 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:36:22 Level : INFO / Message : probleme de conection de BDD  / Méthode : main / Classe : application.Main
+06/03/2024 08:37:00 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:37:00 Level : WARNING / Message : probleme de conection de BDD  / Méthode : main / Classe : application.Main
+06/03/2024 08:41:20 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:41:34 Level : INFO / Message : Bdd fermée / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 08:44:17 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:44:22 Level : INFO / Message : Fin du programme / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 08:46:12 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 08:46:17 Level : INFO / Message : Fin du programme / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 09:16:26 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:16:26 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:17:37 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 09:18:27 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:18:27 Level : WARNING / Message : Problème de connexion à la base de données / Méthode : main / Classe : application.Main
+06/03/2024 09:18:48 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:18:48 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:18:52 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 09:19:11 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:19:11 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 09:19:29 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:19:29 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 09:24:06 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:24:07 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 09:24:10 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 10:05:51 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 10:05:52 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 10:10:26 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 10:16:06 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 10:16:06 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 10:16:27 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 10:17:58 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 10:17:59 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:15:50 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:15:51 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:17:42 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 13:17:45 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:17:45 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:18:04 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 13:22:56 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:22:56 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 13:31:44 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 14:49:10 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 14:49:11 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 14:49:16 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 14:49:18 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 14:49:18 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 14:49:42 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 15:08:56 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 15:08:57 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 15:54:01 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 16:49:47 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:49:47 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:51:33 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 16:51:36 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:51:37 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:57:06 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 16:57:09 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:57:09 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 16:58:09 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:58:10 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+06/03/2024 16:59:07 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:59:08 Level : INFO / Message : fin du programme / Méthode : main / Classe : application.Main
+06/03/2024 16:59:16 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 08:51:07 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 08:51:07 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 08:51:40 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 08:51:40 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 08:51:55 Level : INFO / Message : Fermeur de connexion à la base de données / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 09:26:50 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:26:50 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:31:41 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:31:41 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:33:31 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 09:33:33 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:33:33 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:33:58 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 09:40:11 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:40:12 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:53:07 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 09:53:08 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:25:50 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:25:50 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:26:22 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 10:26:26 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:26:27 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:27:36 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 10:27:41 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:27:41 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:28:51 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:28:51 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:28:58 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:28:58 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:29:25 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 10:42:15 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:42:15 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:42:26 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 10:51:18 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 10:51:18 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 11:01:02 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 11:01:02 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 11:01:48 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 11:01:48 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 11:02:26 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 13:21:30 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:21:30 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:22:00 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:22:00 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:23:30 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 13:23:31 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:23:32 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:25:25 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 13:25:26 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:25:27 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:25:29 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:25:29 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:26:40 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 13:26:44 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:26:44 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:26:57 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 13:26:58 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main

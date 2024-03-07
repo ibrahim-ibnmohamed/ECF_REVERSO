@@ -39,7 +39,7 @@ public class Affichage extends JDialog {
             try {
                 ArrayList<Client> liste = ControleurAffichage.findAllClient();
 
-                Object[][] data = new Object[liste.size()][11];
+                Object[][] data = new Object[liste.size()][10];
                 for (int i = 0; i < liste.size(); i++) {
                     Client client = liste.get(i);
                     data[i][0] = client.getId();
@@ -50,13 +50,12 @@ public class Affichage extends JDialog {
                     data[i][5] = client.getCodePostal();
                     data[i][6] = client.getTelephone();
                     data[i][7] = client.getemail();
-                    data[i][8] = client.getCommentaire();
-                    data[i][9] = client.getChiffreDaffaire();
-                    data[i][10] = client.getNombreEmployer();
+                    data[i][8] = client.getChiffreDaffaire();
+                    data[i][9] = client.getNombreEmployer();
                 }
 
                 String[] columnNames = {"identifiant", "Raison Social", "Num Rue", "Nom Rue",
-                        "Ville", "Code Postal", "num Tel", "Adresse mail", "Commentaire", "Chiffre d'affaire",
+                        "Ville", "Code Postal", "num Tel", "Adresse mail", "Chiffre d'affaire",
                         "Nombre d'employé"};
                 DefaultTableModel model = new DefaultTableModel(data, columnNames);
                 tAffichage.setModel(model);
@@ -73,7 +72,7 @@ public class Affichage extends JDialog {
             try {
                 ArrayList<Prospect> liste = ControleurAffichage.findAllProspect();
 
-                Object[][] data = new Object[liste.size()][11];
+                Object[][] data = new Object[liste.size()][10];
                 for (int i = 0; i < liste.size(); i++) {
                     Prospect prospect = liste.get(i);
                     data[i][0] = prospect.getId();
@@ -84,13 +83,12 @@ public class Affichage extends JDialog {
                     data[i][5] = prospect.getCodePostal();
                     data[i][6] = prospect.getTelephone();
                     data[i][7] = prospect.getemail();
-                    data[i][8] = prospect.getCommentaire();
-                    data[i][9] = prospect.getDateDeProspection();
-                    data[i][10] = prospect.getProspectInteresse();
+                    data[i][8] = prospect.getDateDeProspection();
+                    data[i][9] = prospect.getProspectInteresse();
                 }
 
                 String[] columnNames = {"identifiant", "Raison Social", "Num Rue", "Nom Rue",
-                        "Ville", "Code Postal", "num Tel", "Adresse mail", "Commentaire", "DateDeProspection",
+                        "Ville", "Code Postal", "num Tel", "Adresse mail", "DateDeProspection",
                         "ProspectInteresse"};
                 DefaultTableModel model = new DefaultTableModel(data, columnNames);
                 tAffichage.setModel(model);
