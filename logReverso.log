@@ -122,3 +122,12 @@
 07/03/2024 13:26:44 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
 07/03/2024 13:26:57 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
 07/03/2024 13:26:58 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 14:58:52 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 14:58:52 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 14:59:44 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 14:59:44 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 15:08:56 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 15:08:56 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
+07/03/2024 15:11:24 Level : INFO / Message : Fermeture de la connexion à la base de données. / Méthode : run / Classe : model.dao.DaoConnection$1
+07/03/2024 15:14:13 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+07/03/2024 15:14:14 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
