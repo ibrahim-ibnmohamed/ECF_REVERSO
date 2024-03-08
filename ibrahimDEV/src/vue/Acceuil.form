@@ -39,7 +39,7 @@
         <properties>
           <font size="26"/>
           <model>
-            <item value="Procpect"/>
+            <item value="Prospect"/>
             <item value="Create"/>
             <item value="Update"/>
             <item value="Delete"/>

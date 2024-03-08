@@ -143,7 +143,7 @@ public class Formulair extends JDialog {
                             } catch (MyException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "Ce client est déjà enregistré. ");
                             } catch (IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (NumberFormatException Nf) {
@@ -152,9 +152,9 @@ public class Formulair extends JDialog {
                                 JOptionPane.showMessageDialog(null, "Annulé: ");
 
                             } catch (DaoException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "probléme de BDD");
                             }
-                            ;
+
 
 
                         }
@@ -256,16 +256,25 @@ public class Formulair extends JDialog {
 
                             try {
                                 ControleurFormulaire.updateClient(id, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
+                                JOptionPane.showMessageDialog(null, "Client mis à jour avec succès !");
+
+
                             } catch (MyException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la mis à jour  : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "Ce client est déjà enregistré. ");
                             } catch (IOException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            } catch (NumberFormatException Nf) {
+                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            } catch (NullPointerException NE) {
+                                JOptionPane.showMessageDialog(null, "Annulé: ");
+
                             } catch (DaoException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "probléme de BDD");
                             }
-                            JOptionPane.showMessageDialog(null, "Client mis à jour avec succès !");
+
+
 
                             ControleurFormulaire.startAccueil();
                             dispose();
@@ -474,21 +483,18 @@ public class Formulair extends JDialog {
                             } catch (MyException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "Ce prospect est déjà enregistré. ");
                             } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-
-                            } catch (DateTimeParseException De) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Le date n'est pas correct, il doit respecter le format jj/mm/aaaa", "Erreur", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (NumberFormatException Nf) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (NullPointerException NE) {
                                 JOptionPane.showMessageDialog(null, "Annulé: ");
 
                             } catch (DaoException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null, "probléme de BDD");
                             }
-                            ;
+
 
                         }
 
@@ -585,22 +591,20 @@ public class Formulair extends JDialog {
                             ControleurFormulaire.updateProspect(id, raisonSociale, numDeRue, nomDeRue, codePostale,
                                     telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
                             JOptionPane.showMessageDialog(null, "Prospect mis à jour avec succès !");
-                        } catch (MyException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
 
-                        } catch (DateTimeParseException De) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Le date n'est pas correct, il doit respecter le format jj/mm/aaaa", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        } catch (MyException ex) {
+                            JOptionPane.showMessageDialog(null, "Erreur lors de la mis à jour  : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                        } catch (SQLException ex) {
+                            JOptionPane.showMessageDialog(null, "Ce Prospect est déjà enregistré. ");
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
                         } catch (NumberFormatException Nf) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
                         } catch (NullPointerException NE) {
                             JOptionPane.showMessageDialog(null, "Annulé: ");
 
                         } catch (DaoException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(null, "probléme de BDD");
                         }
                         ;
                         ControleurFormulaire.startAccueil();

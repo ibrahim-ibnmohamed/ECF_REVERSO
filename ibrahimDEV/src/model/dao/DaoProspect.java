@@ -41,7 +41,7 @@ public class DaoProspect {
                 "E_MAIL, " +
                 "DATE_PROSPECT, " +
                 "COMMENTAIRE " +
-                "FROM prospect";
+                "FROM prospect ORDER BY RAISON_SOCIALE ASC";
 
         if (connection == null) {
             MyLogger.LOGGER.log(Level.INFO, "Problème lors de la récupération des prospects depuis la base de données.");
