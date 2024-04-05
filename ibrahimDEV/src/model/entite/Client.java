@@ -59,7 +59,7 @@ public class Client extends Societe {
      * @throws MyException Si le chiffre d'affaires n'est pas valide.
      */
     public void setChiffreDaffaire(Double chiffreDaffaire) throws MyException {
-        if (chiffreDaffaire == null || chiffreDaffaire.equals("")) {
+        if (chiffreDaffaire == null) {
             throw new MyException("Le chiffre d’affaires doit être renseigné.");
         }
         if (chiffreDaffaire <= 200) {

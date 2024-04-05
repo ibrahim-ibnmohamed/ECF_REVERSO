@@ -5,6 +5,8 @@ import exception.DaoException;
 import exception.MyException;
 import utilitaires.FormatterLog;
 import utilitaires.MyLogger;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.FileHandler;
@@ -20,7 +22,7 @@ public class Main {
      * @throws SQLException en cas d'erreur de base de données.
      * @throws IOException en cas d'erreur d'entrée/sortie.
      */
-    public Main() throws SQLException, IOException {
+    public Main(){
     }
 
     /**
@@ -31,21 +33,28 @@ public class Main {
      * @throws IOException en cas d'erreur d'entrée/sortie.
      * @throws DaoException en cas d'exception DAO.
      */
-    public static void main(String[] args) throws MyException, SQLException, IOException, DaoException {
+    public static void main(String[] args) {
+        try {
 
-        // Configuration du journal
-        FileHandler fh = new FileHandler("logReverso.log", true);
-        fh.setFormatter(new FormatterLog());
-        MyLogger.LOGGER.setUseParentHandlers(false);
-        MyLogger.LOGGER.addHandler(fh);
+            // Configuration du journal
+            FileHandler fh = new FileHandler("logReverso.log", true);
+            fh.setFormatter(new FormatterLog());
+            MyLogger.LOGGER.setUseParentHandlers(false);
+            MyLogger.LOGGER.addHandler(fh);
 
-        // Début du programme
-        MyLogger.LOGGER.log(Level.INFO, "Début du programme");
+            // Début du programme
+            MyLogger.LOGGER.log(Level.INFO, "Début du programme");
 
-        // Initialisation du contrôleur d'accueil
-        ControleurAccueil.init();
+            // Initialisation du contrôleur d'accueil
+            ControleurAccueil.init();
 
-        // Fin du programme
-        MyLogger.LOGGER.log(Level.INFO, "Fin du programme");
+            // Fin du programme
+            MyLogger.LOGGER.log(Level.INFO, "Fin du programme");
+        } catch (IOException e) {
+            System.exit(1);
+            JOptionPane.showMessageDialog(null,"Il semble qu'il y ait un problème . Pouvez-vous essayer ultérieurement");
+
+        }
+
     }
 }

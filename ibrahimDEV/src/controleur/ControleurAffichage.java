@@ -22,7 +22,7 @@ public class ControleurAffichage {
      *
      * @param choix le choix spécifié pour l'affichage.
      */
-    public static void init(String choix) throws MyException, SQLException, IOException, DaoException {
+    public static void init(String choix) {
         Affichage affichage = new Affichage(choix);
         affichage.setVisible(true);
     }
@@ -32,7 +32,7 @@ public class ControleurAffichage {
      *
      * @return une liste de tous les clients.
      */
-    public static ArrayList<Client> findAllClient() throws MyException, SQLException, IOException, DaoException {
+    public static ArrayList<Client> findAllClient() throws Exception {
             return DaoClient.findAll();
     }
 
@@ -41,7 +41,7 @@ public class ControleurAffichage {
      *
      * @return une liste de tous les Prospects.
      */
-    public static ArrayList<Prospect> findAllProspect() throws MyException, SQLException, IOException, DaoException {
+    public static ArrayList<Prospect> findAllProspect() throws Exception {
         return DaoProspect.findAll();
     }
 

@@ -66,7 +66,7 @@ public class Prospect extends Societe {
      * @throws MyException Si la date de prospection n'est pas valide.
      */
     public void setDateDeProspection(LocalDate dateDeProspection) throws MyException {
-        if (dateDeProspection == null || dateDeProspection.equals("")) {
+        if (dateDeProspection == null) {
             throw new MyException("Veuillez remplir le champ 'Date de Prospection'.");
         }
         this.dateDeProspection = dateDeProspection;
@@ -88,7 +88,7 @@ public class Prospect extends Societe {
      * @throws MyException Si l'intérêt du prospect n'est pas valide.
      */
     public void setProspectInteresse(String prospectInteresse) throws MyException {
-        if (prospectInteresse == null || prospectInteresse.equals("")) {
+        if (prospectInteresse == null || prospectInteresse.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Interesse'.");
         }
         // Vérifier si la valeur est "oui" ou "non" (en ignorant la casse)

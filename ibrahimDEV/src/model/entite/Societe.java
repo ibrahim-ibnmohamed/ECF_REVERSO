@@ -74,7 +74,7 @@ public Societe(){}
 
 
     public void setRaisonSociale(String raisonSociale) throws MyException {
-        if (raisonSociale == null || raisonSociale.equals("")) {
+        if (raisonSociale == null || raisonSociale.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Raison Sociale'.");
         }
         this.raisonSociale = raisonSociale;
@@ -86,7 +86,7 @@ public Societe(){}
 
     public void setNumeroDeRue(String numeroDeRue) throws MyException {
 
-        if (numeroDeRue == null || numeroDeRue.equals("")) {
+        if (numeroDeRue == null || numeroDeRue.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Numéro de rue '.");
         }
             this.numeroDeRue = numeroDeRue;
@@ -97,7 +97,7 @@ public Societe(){}
     }
 
     public void setNomDeRue(String nomDeRue) throws MyException {
-        if (nomDeRue == null ||nomDeRue.equals("")) {
+        if (nomDeRue == null || nomDeRue.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Nom de rue '.");
         }
         this.nomDeRue = nomDeRue;
@@ -108,7 +108,7 @@ public Societe(){}
     }
 
     public void setCodePostal(String codePostal) throws MyException {
-        if (codePostal == null || codePostal.equals("")) {
+        if (codePostal == null || codePostal.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Code Postal'.");
         } else if (codePostal.length() > 5) {
             throw new MyException("Le code postal ne doit pas dépasser 5 caractères.");
@@ -123,7 +123,7 @@ public Societe(){}
     }
 
     public void setVille(String ville) throws MyException {
-        if (ville == null ||ville.equals("")) {
+        if (ville == null || ville.isEmpty()) {
             throw new MyException("Veuillez remplir le champ 'Ville'.");
         }
 
@@ -135,7 +135,7 @@ public Societe(){}
     }
 
     public void setTelephone(String telephone) throws MyException {
-        if(telephone == null ||telephone.equals("")){
+        if(telephone == null || telephone.isEmpty()){
             throw new MyException("Veuillez remplir le champ 'N° Téléphone'.");
         }
       else if(telephone.length()<10){

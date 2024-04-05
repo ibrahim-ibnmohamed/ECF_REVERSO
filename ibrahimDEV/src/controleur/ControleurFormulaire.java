@@ -45,8 +45,8 @@ public class ControleurFormulaire {
      * @throws IOException si une erreur d'entrée/sortie se produit.
      * @throws DaoException si une erreur DAO se produit.
      */
-    public static void choixClient() throws MyException, SQLException, ControleurExcpetion, IOException, DaoException {
-        ControleurAccueil.selectClient();
+    public static void choixClient() throws Exception{
+        ControleurAccueil.selectClient("clientVise");
     }
 
     /**
@@ -54,8 +54,8 @@ public class ControleurFormulaire {
      *
      * @throws MyException si une exception générale se produit.
      */
-    public static void choixProspect() throws MyException {
-        ControleurAccueil.selectProspect();
+    public static void choixProspect() throws Exception {
+        ControleurAccueil.selectProspect("prospectVise");
     }
     public static Client clientVise;
     public static Prospect prospectVise;
@@ -63,7 +63,7 @@ public class ControleurFormulaire {
     //---------------------Create-----------
     public static void createClient(int idClient, String raisonSociale, String numRue, String nomRue,
                                     String codePostal, String telephone, String ville, String email,
-                                    String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws MyException, SQLException, IOException, NullPointerException, DaoException {
+                                    String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws Exception {
 
 
 
@@ -83,10 +83,7 @@ public class ControleurFormulaire {
                                       String dateDeProspection,
                                       String prospectInteresse)
             throws
-            MyException,
-            SQLException,
-            IOException,
-            NullPointerException, DaoException {
+            Exception {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateProspection = LocalDate.parse(dateDeProspection, formatter);
@@ -98,7 +95,7 @@ public class ControleurFormulaire {
     //-------------------------------Update-----------------------
     public static void updateClient(int idClient, String raisonSociale, String numRue, String nomRue,
                                     String codePostal, String telephone, String ville, String email,
-                                    String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws MyException, SQLException, IOException, NullPointerException, DaoException {
+                                    String commentaire, double chiffreAffaireStr, int nombreEmployesStr) throws Exception{
 
         double chiffreAffaire = Double.parseDouble(String.valueOf(chiffreAffaireStr));
         int nombreEmployes = Integer.parseInt(String.valueOf(nombreEmployesStr));
@@ -111,8 +108,7 @@ public class ControleurFormulaire {
 
     public static void updateProspect(int idProspect, String raisonSociale, String numRue, String nomRue,
                                       String codePostal, String telephone, String ville, String email, String commentaire,
-                                      String dateDeProspectionStr, String prospectInteresse) throws MyException,
-            SQLException, IOException, NullPointerException, DaoException {
+                                      String dateDeProspectionStr, String prospectInteresse) throws Exception {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateDeProspection = LocalDate.parse(dateDeProspectionStr, formatter);
@@ -124,12 +120,12 @@ public class ControleurFormulaire {
     }
 
     //-------------------------------Delete-----------------------
-    public static void deleteClient(Client clientVise) throws MyException, SQLException, IOException, NullPointerException, DaoException {
+    public static void deleteClient(Client clientVise) throws Exception{
 
         DaoClient.delete(clientVise.getId());
     }
 
-    public static void deleteProspect(Prospect prospectVise) throws MyException, SQLException, IOException, NullPointerException, DaoException {
+    public static void deleteProspect(Prospect prospectVise) throws Exception{
 
         DaoProspect.delete(prospectVise.getId());
     }

@@ -3,12 +3,17 @@ package vue;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import controleur.ControleurAffichage;
+import exception.DaoException;
 import model.entite.Client;
 import model.entite.Prospect;
+import utilitaires.MyLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.Collator;
 import java.util.ArrayList;
-
+import java.util.Comparator;
+import java.util.Locale;
+import java.util.logging.Level;
 
 
 /**
@@ -39,6 +44,13 @@ public class Affichage extends JDialog {
             try {
                 ArrayList<Client> liste = ControleurAffichage.findAllClient();
 
+                Comparator<Client> comparateur = Comparator.comparing(
+                        client -> client.getRaisonSociale().toUpperCase(),
+                        Collator.getInstance()
+                );
+
+                liste.sort(comparateur);
+
                 Object[][] data = new Object[liste.size()][10];
                 for (int i = 0; i < liste.size(); i++) {
                     Client client = liste.get(i);
@@ -63,14 +75,27 @@ public class Affichage extends JDialog {
                 jsScrol.setVisible(true);
                 tAffichage.setVisible(true);
 
+            }
+            catch (DaoException de){
+                JOptionPane.showMessageDialog(null,de.getMessage());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "un problème survient lors de l'affichage des clients.");
+                MyLogger.LOGGER.log(Level.SEVERE,e.getMessage());
+                System.exit(1);
             }
 
         } else if (choix.equals("procpect")) {
 
             try {
                 ArrayList<Prospect> liste = ControleurAffichage.findAllProspect();
+                // Trier la liste après avoir converti les noms en majuscules
+                Comparator<Prospect> comparateur = Comparator.comparing(
+                        prospect -> prospect.getRaisonSociale().toUpperCase(),
+                        Collator.getInstance()
+                );
+
+                liste.sort(comparateur);
+
 
                 Object[][] data = new Object[liste.size()][10];
                 for (int i = 0; i < liste.size(); i++) {
@@ -96,10 +121,13 @@ public class Affichage extends JDialog {
                 jsScrol.setVisible(true);
                 tAffichage.setVisible(true);
 
+            }
+            catch (DaoException de){
+                JOptionPane.showMessageDialog(null,de.getMessage());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "un problème survient lors de l'affichage des prospects.");
-
-
+                JOptionPane.showMessageDialog(null, "un problème survient lors de l'affichage des Prospects.");
+                MyLogger.LOGGER.log(Level.SEVERE,e.getMessage());
+                System.exit(1);
             }
 
 

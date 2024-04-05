@@ -1,16 +1,16 @@
 package vue;
 
 import controleur.ControleurAccueil;
-import exception.ControleurExcpetion;
 import exception.DaoException;
-import exception.MyException;
+import model.entite.Client;
+import model.entite.Prospect;
+import utilitaires.MyLogger;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
-
-
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Cette classe représente la fenêtre d'accueil de l'application.
@@ -18,12 +18,10 @@ import java.sql.SQLException;
  * concernant les clients et les prospects.
  */
 
-
 public class Acceuil extends JDialog {
 
     private JPanel panel1;// Panel principal de la fenêtre
     private JLabel lbTitre; // Titre de la fenêtre
-
 
     // Boutons déroulants pour les actions sur les clients et les prospects
     private JComboBox<String> clientBtnCombo;
@@ -41,7 +39,6 @@ public class Acceuil extends JDialog {
         setSize(800, 800);
         setLocationRelativeTo(null);
 
-
         // Action listener pour le bouton déroulant des actions sur les clients
         clientBtnCombo.addActionListener(new ActionListener() {
             @Override
@@ -51,58 +48,70 @@ public class Acceuil extends JDialog {
                 // Traitement selon l'action sélectionnée
                 switch (choixSelectionne) {
                     case "Create":
-
-                        try {
-                            ControleurAccueil.startFormulaire("createClient");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        ControleurAccueil.startFormulaire("createClient");
                         dispose();
                         break;
                     case "Update":
                         try {
-                            ControleurAccueil.selectClient();
-                                JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Update");
-                                ControleurAccueil.startFormulaire("updateClient");
-                                dispose();
+                            ArrayList<Client> clients = ControleurAccueil.findAllClient();
+                            String[] clientNames = new String[clients.size()];
+                            for (int i = 0; i < clients.size(); i++) {
+                                clientNames[i] = clients.get(i).getRaisonSociale();
+                            }
+                            String selectedClientName = (String) JOptionPane.showInputDialog(null,
+                                    "Choisissez un Client à mettre à jour :", "Choix du prospect",
+                                    JOptionPane.QUESTION_MESSAGE, null, clientNames, clientNames[0]);
 
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (ControleurExcpetion ex) {
-                            throw new RuntimeException(ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            if (selectedClientName != null) {
+                                ControleurAccueil.selectClient(selectedClientName);
+                                ControleurAccueil.startFormulaire("updateClient");
+                            } else {
+                                ControleurAccueil.init();
+                            }
+                            dispose();
+
                         } catch (DaoException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                            MyLogger.LOGGER.log(Level.SEVERE, ex.getMessage());
+                            System.exit(1);
                         }
                         break;
                     case "Delete":
                         try {
-                            ControleurAccueil.startFormulaire("deleteClient");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
+                            ArrayList<Client> clients = ControleurAccueil.findAllClient();
+                            String[] clientNames = new String[clients.size()];
+                            for (int i = 0; i < clients.size(); i++) {
+                                clientNames[i] = clients.get(i).getRaisonSociale();
+
+                            }
+
+                            // Afficher la boîte de dialogue pour sélectionner un prospect
+                            String selectedClientName = (String) JOptionPane.showInputDialog(null,
+                                    "Choisissez un client à Supprimer :", "Choix du client",
+                                    JOptionPane.QUESTION_MESSAGE, null, clientNames, clientNames[0]);
+
+                            if (selectedClientName != null) {
+                                ControleurAccueil.selectClient(selectedClientName);
+                                ControleurAccueil.startFormulaire("deleteClient");
+                            } else {
+                                ControleurAccueil.init();
+                            }
+
+                        } catch (DaoException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                            MyLogger.LOGGER.log(Level.SEVERE, ex.getMessage());
+                            System.exit(1);
                         }
                         dispose();
                         break;
-                    case "Find" :
-
-                        try {
-                            ControleurAccueil.startAffichage("client");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (DaoException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                    case "Find":
+                        ControleurAccueil.startAffichage("client");
                         dispose();
+                        break;
                     default:
                         break;
                 }
@@ -111,7 +120,6 @@ public class Acceuil extends JDialog {
         // Action listener pour le bouton déroulant des actions sur les prospects
         prospectBtnCombo.addActionListener(new ActionListener() {
 
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 String choixSelectionne = (String) prospectBtnCombo.getSelectedItem();
@@ -119,52 +127,71 @@ public class Acceuil extends JDialog {
 
                 switch (choixSelectionne) {
                     case "Create":
-                        try {
-                            ControleurAccueil.startFormulaire("createProsecte");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Create");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        ControleurAccueil.startFormulaire("createProsecte");
                         dispose();
 
                         break;
                     case "Update":
                         try {
-                            ControleurAccueil.selectProspect();
-                                JOptionPane.showMessageDialog(Acceuil.this, "vous avez choisi Update");
-                                ControleurAccueil.startFormulaire("updateProspect");
-                                dispose();
+                            ArrayList<Prospect> prospects = ControleurAccueil.findAllProspect();
+                            String[] prospectNames = new String[prospects.size()];
+                            for (int i = 0; i < prospects.size(); i++) {
+                                prospectNames[i] = prospects.get(i).getRaisonSociale();
+                            }
 
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
+                            // Afficher la boîte de dialogue pour sélectionner un prospect
+                            String selectedProspectName = (String) JOptionPane.showInputDialog(null,
+                                    "Choisissez un prospect à mettre à jour :", "Choix du prospect",
+                                    JOptionPane.QUESTION_MESSAGE, null, prospectNames, prospectNames[0]);
+
+                            if (selectedProspectName != null) {
+                                ControleurAccueil.selectProspect(selectedProspectName);
+                                ControleurAccueil.startFormulaire("updateProspect");
+                            } else {
+                                ControleurAccueil.init();
+                            }
+
+                        } catch (DaoException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                            MyLogger.LOGGER.log(Level.SEVERE, ex.getMessage());
+                            System.exit(1);
                         }
+                        dispose();
                         break;
                     case "Delete":
 
                         try {
-                            ControleurAccueil.startFormulaire("deleteProspect");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Delete");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
+                            ArrayList<Prospect> prospects = ControleurAccueil.findAllProspect();
+                            String[] prospectNames = new String[prospects.size()];
+                            for (int i = 0; i < prospects.size(); i++) {
+                                prospectNames[i] = prospects.get(i).getRaisonSociale();
+                            }
+                            // Afficher la boîte de dialogue pour sélectionner un prospect
+                            String selectedProspectName = (String) JOptionPane.showInputDialog(null,
+                                    "Choisissez un prospect à supprimer:", "Choix du prospect",
+                                    JOptionPane.QUESTION_MESSAGE, null, prospectNames, prospectNames[0]);
+
+                            if (selectedProspectName != null) {
+                                ControleurAccueil.selectProspect(selectedProspectName);
+                                ControleurAccueil.startFormulaire("deleteProspect");
+                            } else {
+                                ControleurAccueil.init();
+                            }
+
+                        } catch (DaoException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                            MyLogger.LOGGER.log(Level.SEVERE, ex.getMessage());
+                            System.exit(1);
                         }
 
                         dispose();
                         break;
-                    case "Find" :
-
-                        try {
-                            ControleurAccueil.startAffichage("procpect");
-                            JOptionPane.showMessageDialog(Acceuil.this, "Vous avez choisi Find");
-                        } catch (MyException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        } catch (DaoException ex) {
-                            throw new RuntimeException(ex);
-                        }
-
+                    case "Find":
+                        ControleurAccueil.startAffichage("procpect");
                         dispose();
                     default:
                         break;
@@ -172,6 +199,7 @@ public class Acceuil extends JDialog {
             }
         });
     }
+
     /**
      * Méthode appelée pour créer les composants de l'interface utilisateur.
      * Dans ce cas, elle crée un panel et deux boutons déroulants.

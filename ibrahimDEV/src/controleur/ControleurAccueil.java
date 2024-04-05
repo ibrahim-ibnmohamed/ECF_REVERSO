@@ -8,8 +8,6 @@ import model.dao.DaoProspect;
 import model.entite.Client;
 import model.entite.Prospect;
 import vue.Acceuil;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,24 +16,20 @@ import java.util.ArrayList;
  * Le contrôleur principal de l'interface d'accueil de l'application.
  */
 public class ControleurAccueil {
-
-    private static Acceuil acceuil;
-
     /**
      * Initialise l'interface d'accueil.
      */
     public static void init() {
-        acceuil = new Acceuil();
-        acceuil.setVisible(true);
+      Acceuil acceuil = new Acceuil();
+      acceuil.setVisible(true);
     }
-
     /**
      * Démarre le formulaire spécifié.
      *
      * @param string le type de formulaire à démarrer.
-     * @throws MyException si une exception générale se produit.
+
      */
-    public static void startFormulaire(String string) throws MyException {
+    public static void startFormulaire(String string)  {
         ControleurFormulaire.init(string);
     }
 
@@ -44,7 +38,7 @@ public class ControleurAccueil {
      *
      * @param string le type d'affichage à démarrer.
      */
-    public static void startAffichage(String string) throws MyException, SQLException, IOException, DaoException {
+    public static void startAffichage(String string){
         ControleurAffichage.init(string);
     }
 
@@ -57,24 +51,23 @@ public class ControleurAccueil {
      * @throws ControleurExcpetion si une exception spécifique au contrôleur se produit.
      * @throws DaoException     si une erreur DAO se produit.
      */
-    public static void selectClient() throws MyException, SQLException, IOException, ControleurExcpetion, DaoException {
-        ArrayList<Client> clients = DaoClient.findAll();
+    public static void selectClient(String selectedClientName) throws Exception {
+        ArrayList<Client> clients;
+        try {
+            clients = DaoClient.findAll();
+        } catch (DaoException e) {
+            throw new DaoException("selection de client echoué ");
+        }
 
-        // Vérifier si la liste des clients est vide
+        // Vérifier si la liste des prospects est vided
         if (clients.isEmpty()) {
-            throw new ControleurExcpetion("La liste des clients est vide.");
+            throw new ControleurExcpetion("Aucun prospect trouvé.");
+
         }
 
-        // Créer un tableau de noms de clients pour la boîte de dialogue
-        String[] clientNames = new String[clients.size()];
-        for (int i = 0; i < clients.size(); i++) {
-            clientNames[i] = clients.get(i).getRaisonSociale();
-        }
-
-        // Afficher la boîte de dialogue pour sélectionner un client
-        String selectedClientName = (String) JOptionPane.showInputDialog(null, "Choisissez un client à mettre à jour :", "Choix du client", JOptionPane.QUESTION_MESSAGE, null, clientNames, clientNames[0]);
+        // Créer un tableau de noms de prospects pour la boîte de dialogue
         if (selectedClientName != null) {
-            // Rechercher le client sélectionné dans la liste des clients
+            // Rechercher le prospect sélectionné dans la liste des prospects
             Client selectedClient = null;
             for (Client client : clients) {
                 if (client.getRaisonSociale().equals(selectedClientName)) {
@@ -83,14 +76,15 @@ public class ControleurAccueil {
                 }
             }
 
-            // Vérifier si le client sélectionné a été trouvé
-            if (selectedClient != null) {
-                // Mettre à jour le formulaire avec les informations du client sélectionné
-                ControleurFormulaire.clientVise = selectedClient; // Assigner le client sélectionné
+            // Vérifier si le prospect sélectionné a été trouvé
+            if (selectedClient!= null) {
+                // Mettre à jour le formulaire avec les informations du prospect sélectionné
+                ControleurFormulaire.clientVise = selectedClient; // Assigner le prospect sélectionné
             } else {
-                throw new ControleurExcpetion("Le client sélectionné n'a pas été trouvé.");
+                throw new ControleurExcpetion("Le Client sélectionné n'a pas été trouvé.");
             }
         }
+
     }
 
     /**
@@ -98,33 +92,22 @@ public class ControleurAccueil {
      *
      * @throws MyException si une exception générale se produit.
      */
-    public static void selectProspect() throws MyException {
+    public static void selectProspect(String selectedProspectName) throws Exception {
         ArrayList<Prospect> prospects;
         try {
             prospects = DaoProspect.findAll();
-        } catch (SQLException | IOException | MyException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des prospects : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
         } catch (DaoException e) {
-            throw new RuntimeException(e);
+            throw new DaoException("selection de prospoect echoué ");
         }
 
         // Vérifier si la liste des prospects est vide
         if (prospects.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Aucun prospect trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            throw new ControleurExcpetion("Aucun prospect trouvé.");
+
         }
 
         // Créer un tableau de noms de prospects pour la boîte de dialogue
-        String[] prospectNames = new String[prospects.size()];
-        for (int i = 0; i < prospects.size(); i++) {
-            prospectNames[i] = prospects.get(i).getRaisonSociale();
-        }
-
-        // Afficher la boîte de dialogue pour sélectionner un prospect
-        String selectedProspectName = (String) JOptionPane.showInputDialog(null, "Choisissez un prospect à mettre à jour :", "Choix du prospect", JOptionPane.QUESTION_MESSAGE, null, prospectNames, prospectNames[0]);
-        if (selectedProspectName != null) {
+       if (selectedProspectName != null) {
             // Rechercher le prospect sélectionné dans la liste des prospects
             Prospect selectedProspect = null;
             for (Prospect prospect : prospects) {
@@ -139,8 +122,17 @@ public class ControleurAccueil {
                 // Mettre à jour le formulaire avec les informations du prospect sélectionné
                 ControleurFormulaire.prospectVise = selectedProspect; // Assigner le prospect sélectionné
             } else {
-                JOptionPane.showMessageDialog(null, "Prospect non trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                throw new ControleurExcpetion("Le Prospect sélectionné n'a pas été trouvé.");
             }
         }
+
+    }
+    public static ArrayList <Prospect> findAllProspect() throws Exception{
+
+       return DaoProspect.findAll();
+    }
+    public static ArrayList <Client> findAllClient() throws Exception{
+
+        return DaoClient.findAll();
     }
 }

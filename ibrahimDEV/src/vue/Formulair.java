@@ -5,6 +5,7 @@ import controleur.ControleurFormulaire;
 import exception.ControleurExcpetion;
 import exception.DaoException;
 import exception.MyException;
+import utilitaires.MyLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
 
 
 /**
@@ -61,7 +63,6 @@ public class Formulair extends JDialog {
             }
         });
         switch (choix) {
-
             case "createClient": {
                 // Ajout des composants au formulaire
 
@@ -141,22 +142,20 @@ public class Formulair extends JDialog {
                                 dispose();
 
                             } catch (MyException ex) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage());
                             } catch (SQLException ex) {
-                                JOptionPane.showMessageDialog(null, "Ce client est déjà enregistré. ");
-                            } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             } catch (NumberFormatException Nf) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            } catch (NullPointerException NE) {
-                                JOptionPane.showMessageDialog(null, "Annulé: ");
-
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.");
                             } catch (DaoException ex) {
-                                JOptionPane.showMessageDialog(null, "probléme de BDD");
+                                JOptionPane.showMessageDialog(null,ex.getMessage() );
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             }
-
-
-
                         }
                     }
                 });
@@ -170,9 +169,7 @@ public class Formulair extends JDialog {
                 });
 
             }
-
             break;
-
             case "updateClient": {
                 // Ajout des composants au formulaire
                 lbId = new JLabel("ID Client:");
@@ -257,27 +254,25 @@ public class Formulair extends JDialog {
                             try {
                                 ControleurFormulaire.updateClient(id, raisonSociale, numDeRue, nomDeRue, codePostale, telephone, ville, email, commentaire, chiffreAffaire, nombreEmployes);
                                 JOptionPane.showMessageDialog(null, "Client mis à jour avec succès !");
-
-
+                                ControleurFormulaire.startAccueil();
+                                dispose();
                             } catch (MyException ex) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de la mis à jour  : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de la mis à jour  : " + ex.getMessage());
                             } catch (SQLException ex) {
-                                JOptionPane.showMessageDialog(null, "Ce client est déjà enregistré. ");
+                                JOptionPane.showMessageDialog(null, "Désolé le problème vient de nous");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             } catch (IOException ex) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "vérifier la longueur ");
                             } catch (NumberFormatException Nf) {
-                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            } catch (NullPointerException NE) {
-                                JOptionPane.showMessageDialog(null, "Annulé: ");
-
-                            } catch (DaoException ex) {
-                                JOptionPane.showMessageDialog(null, "probléme de BDD");
+                                JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.");
+                            }  catch (DaoException ex) {
+                                JOptionPane.showMessageDialog(null, ex.getMessage());
+                            } catch (Exception ex) {
                             }
 
 
 
-                            ControleurFormulaire.startAccueil();
-                            dispose();
                         }
                     });
                 }
@@ -335,59 +330,47 @@ public class Formulair extends JDialog {
 
                 btnAccueil = new JButton("Accueil");
                 add(btnAccueil);
-                try {
-                    ControleurFormulaire.choixClient();
+                //   ControleurFormulaire.choixClient();
 
-                    // Met à jour les champs du formulaire avec les informations du client
-                    tfId.setText(Integer.toString(ControleurFormulaire.clientVise.getId()));
-                    tfId.setEnabled(false);
-                    tfRaisonSociale.setText(ControleurFormulaire.clientVise.getRaisonSociale());
-                    tfNomRue.setText(ControleurFormulaire.clientVise.getNomDeRue());
-                    tfNumRue.setText(ControleurFormulaire.clientVise.getNumeroDeRue());
-                    tfCodePostal.setText(ControleurFormulaire.clientVise.getCodePostal());
-                    tfVille.setText(ControleurFormulaire.clientVise.getVille());
-                    tfTelephone.setText(ControleurFormulaire.clientVise.getTelephone());
-                    tfEmail.setText(ControleurFormulaire.clientVise.getemail());
-                    tfChiffreAffaire.setText(Double.toString(ControleurFormulaire.clientVise.getChiffreDaffaire()));
-                    tfNombreEmployes.setText(Integer.toString(ControleurFormulaire.clientVise.getNombreEmployer()));
-                    tfCommentaire.setText(ControleurFormulaire.clientVise.getCommentaire());
+                // Met à jour les champs du formulaire avec les informations du client
+                tfId.setText(Integer.toString(ControleurFormulaire.clientVise.getId()));
+                tfId.setEnabled(false);
+                tfRaisonSociale.setText(ControleurFormulaire.clientVise.getRaisonSociale());
+                tfNomRue.setText(ControleurFormulaire.clientVise.getNomDeRue());
+                tfNumRue.setText(ControleurFormulaire.clientVise.getNumeroDeRue());
+                tfCodePostal.setText(ControleurFormulaire.clientVise.getCodePostal());
+                tfVille.setText(ControleurFormulaire.clientVise.getVille());
+                tfTelephone.setText(ControleurFormulaire.clientVise.getTelephone());
+                tfEmail.setText(ControleurFormulaire.clientVise.getemail());
+                tfChiffreAffaire.setText(Double.toString(ControleurFormulaire.clientVise.getChiffreDaffaire()));
+                tfNombreEmployes.setText(Integer.toString(ControleurFormulaire.clientVise.getNombreEmployer()));
+                tfCommentaire.setText(ControleurFormulaire.clientVise.getCommentaire());
 
-                    btnValider.setText("Supprimer");
-                    btnValider.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Client ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
-                            if (confirmDelete == JOptionPane.YES_OPTION) {
-                                try {
-                                    ControleurFormulaire.deleteClient(ControleurFormulaire.clientVise);
-                                } catch (MyException ex) {
-                                    throw new RuntimeException(ex);
-                                } catch (SQLException ex) {
-                                    throw new RuntimeException(ex);
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
-                                } catch (DaoException ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                                JOptionPane.showMessageDialog(null, "Client supprimé avec succès !");
-                                ControleurFormulaire.startAccueil();
-                                dispose();
+                btnValider.setText("Supprimer");
+                btnValider.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Client ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+                        if (confirmDelete == JOptionPane.YES_OPTION) {
+                            try {
+                                ControleurFormulaire.deleteClient(ControleurFormulaire.clientVise);
+                            } catch (MyException ex) {
+                                throw new RuntimeException(ex);
+                            } catch (SQLException ex) {
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
                             }
+                            JOptionPane.showMessageDialog(null, "Client supprimé avec succès !");
+                            ControleurFormulaire.startAccueil();
+                            dispose();
                         }
+                    }
 
-                    });
-                } catch (ControleurExcpetion ce) {
-                    JOptionPane.showMessageDialog(null, ce.getMessage());
-
-                } catch (MyException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                } catch (DaoException e) {
-                    throw new RuntimeException(e);
-                }
+                });
 
                 btnAccueil.addActionListener(new ActionListener() {
                     @Override
@@ -399,7 +382,6 @@ public class Formulair extends JDialog {
                 });
             }
             break;
-
             case "createProsecte": {
 
 
@@ -483,21 +465,24 @@ public class Formulair extends JDialog {
                             } catch (MyException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (SQLException ex) {
-                                JOptionPane.showMessageDialog(null, "Ce prospect est déjà enregistré. ");
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             } catch (IOException ex) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
                             } catch (NumberFormatException Nf) {
                                 JOptionPane.showMessageDialog(null, "Erreur lors de la création : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                            } catch (NullPointerException NE) {
-                                JOptionPane.showMessageDialog(null, "Annulé: ");
+                            }  catch (DaoException ex) {
+                                JOptionPane.showMessageDialog(null, ex.getMessage() );
+                            } catch (DateTimeParseException de ){
+                                JOptionPane.showMessageDialog(null, " Veuillez utiliser ce format pour vos entrées. JJ/MM/AAAA");
 
-                            } catch (DaoException ex) {
-                                JOptionPane.showMessageDialog(null, "probléme de BDD");
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             }
-
-
                         }
-
                     }
                 });
                 btnAccueil.addActionListener(new ActionListener() {
@@ -592,23 +577,31 @@ public class Formulair extends JDialog {
                                     telephone, ville, email, commentaire, dateDeProspection, prospectInteresse);
                             JOptionPane.showMessageDialog(null, "Prospect mis à jour avec succès !");
 
-                        } catch (MyException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de la mis à jour  : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                        } catch (SQLException ex) {
-                            JOptionPane.showMessageDialog(null, "Ce Prospect est déjà enregistré. ");
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "vérifier la longueur ", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        } catch (NumberFormatException Nf) {
-                            JOptionPane.showMessageDialog(null, "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                        } catch (NullPointerException NE) {
-                            JOptionPane.showMessageDialog(null, "Annulé: ");
 
+                            ControleurFormulaire.startAccueil();
+                            dispose();
+
+                        }catch (MyException ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Erreur lors de la mis à jour  : " + ex.getMessage());
+                        }  catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Erreur lors de mis à jour  : " + "vérifier la longueur ");
+                        } catch (NumberFormatException Nf) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Erreur lors de mis à jour  : " + "Veuillez vérifier les types de données qui existent dans les champs.");
+                        } catch (NullPointerException NE) {
                         } catch (DaoException ex) {
-                            JOptionPane.showMessageDialog(null, "probléme de BDD");
+                            JOptionPane.showMessageDialog(null,ex.getMessage() );
+                        }catch (DateTimeParseException de ){
+                            JOptionPane.showMessageDialog(null,
+                                    " Veuillez utiliser ce format pour vos entrées. JJ/MM/AAAA");
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "désolé une erreur s'est produite");
+                            MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                            System.exit(1);
                         }
-                        ;
-                        ControleurFormulaire.startAccueil();
-                        dispose();
                     }
                 });
 
@@ -665,15 +658,9 @@ public class Formulair extends JDialog {
 
                 btnAccueil = new JButton("Accueil");
                 add(btnAccueil);
-                try {
-                    ControleurFormulaire.choixProspect();
-                } catch (MyException e) {
-                    throw new RuntimeException(e);
-
-                }
-
-
+//
                 // Met à jour les champs du formulaire avec les informations du client
+
                 tfId.setText(Integer.toString(ControleurFormulaire.prospectVise.getId()));
                 tfId.setEnabled(false);
                 tfRaisonSociale.setText(ControleurFormulaire.prospectVise.getRaisonSociale());
@@ -692,27 +679,23 @@ public class Formulair extends JDialog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Client ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
+                        int confirmDelete = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer ce Prospect ?", "Confirmation de suppression", JOptionPane.YES_NO_OPTION);
                         if (confirmDelete == JOptionPane.YES_OPTION) {
-
                             try {
-                                ControleurFormulaire.deleteProspect(ControleurFormulaire.prospectVise);
+                                    ControleurFormulaire.deleteProspect(ControleurFormulaire.prospectVise);
 
+                                JOptionPane.showMessageDialog(null, "Prospect supprimé avec succès !");
+                                ControleurFormulaire.startAccueil();
+                                dispose();
 
-                            } catch (MyException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (NullPointerException NE) {
-                                JOptionPane.showMessageDialog(null, "Annulé: ");
                             } catch (DaoException ex) {
-                                throw new RuntimeException(ex);
+                                JOptionPane.showMessageDialog(null,ex.getMessage() );
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, "désolé une erreur s'est produite");
+                                MyLogger.LOGGER.log(Level.SEVERE,ex.getMessage());
+                                System.exit(1);
                             }
-                            JOptionPane.showMessageDialog(null, "Prospect supprimé avec succès !");
-                            ControleurFormulaire.startAccueil();
-                            dispose();
+
                         }
                     }
                 });
