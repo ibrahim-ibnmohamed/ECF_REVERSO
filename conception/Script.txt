@@ -1,0 +1,48 @@
+/*==============================================================*/
+/* Nom de SGBD :  MySQL 5.0                                     */
+/* Date de création :  28/02/2024 11:43:12                      */
+/*==============================================================*/
+
+
+drop table if exists CLIENT;
+
+drop table if exists PROSPECT;
+
+/*==============================================================*/
+/* Table : CLIENT                                               */
+/*==============================================================*/
+create table CLIENT
+(
+   ID_CLIENT            int not null auto_increment,
+   NBR_EMPLOYE          int not null,
+   RAISON_SOCIALE       char(30) not null,
+   NOM_RUE              char(30) not null,
+   NUM_RUE              char(5) not null,
+   CODE_POSTALE         char(5) not null,
+   VILLE                char(30) not null,
+   NUM_TELEPHONE        char(13) not null,
+   E_MAIL               char(50) not null,
+   COMMENTAIRE          longtext,
+   CHFFREAFAIR          char(50) not null,
+   primary key (ID_CLIENT)
+);
+
+/*==============================================================*/
+/* Table : PROSPECT                                             */
+/*==============================================================*/
+create table PROSPECT
+(
+   ID_PROSPECT          int not null auto_increment,
+   RAISON_SOCIALE       char(30) not null,
+   NOM_RUE              char(30) not null,
+   NUM_RUE              char(5) not null,
+   CODE_POSTALE         char(5) not null,
+   VILLE                char(30) not null,
+   NUM_TELEPHONE        char(13) not null,
+   E_MAIL               char(50) not null,
+   COMMENTAIRE          longtext,
+   DATE_PROSPECT        date not null,
+   INTERESSE            char(50) not null,
+   primary key (ID_PROSPECT)
+);
+
