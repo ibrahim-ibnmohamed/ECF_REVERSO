@@ -900,3 +900,5 @@ The last packet successfully received from the server was 4 615 milliseconds a
 21/03/2024 16:44:44 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
 21/03/2024 16:44:45 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
 21/03/2024 16:44:47 Level : INFO / Message : Connexion à la base de données établie avec succès. / Méthode : connect / Classe : model.dao.DaoConnection
+30/04/2024 13:51:35 Level : INFO / Message : Début du programme / Méthode : main / Classe : application.Main
+30/04/2024 13:51:35 Level : INFO / Message : Fin du programme / Méthode : main / Classe : application.Main
