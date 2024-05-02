@@ -19,7 +19,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install default-jdk
       - name: Compilation du projet
-        run: javac -sourcepath src -d out ibrahimDEV/src/**/*.java
+        run: javac -sourcepath ibrahimDEV/src -d out ibrahimDEV/src/**/*.java
 
 
       - name: Create Artifacts Directory if not exists
