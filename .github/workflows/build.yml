@@ -32,6 +32,11 @@ jobs:
       - name: End Message
         run: echo "Build process completed successfully"
 
+      - name: Check directory content
+        run: ls
+        working-directory: ${{ github.workspace }}
+
+
       - name: Analyse SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
         env:
