@@ -1,4 +1,4 @@
-name: Build and Analyze
+name: Build
 
 on:
   push:
@@ -22,10 +22,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install default-jdk
-
-      - name: Créer le dossier "out"
-        run: mkdir -p out
-        working-directory: ${{ github.workspace }}  # Utiliser la variable github.workspace pour définir le répertoire racine du dépôt
 
       - name: Compilation du projet
         run: javac -sourcepath src -d out src/.java src/**/.java
