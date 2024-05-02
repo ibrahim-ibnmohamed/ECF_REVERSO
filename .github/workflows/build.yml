@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir -p out  # Créer un dossier "out" s'il n'existe pas
           javac -d out src/**/*.java
-        working-directory: ../../ibrahimDEV/src/application/Main
+        working-directory: ${{ github.workspace }} 
 
       - name: Analyse SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
