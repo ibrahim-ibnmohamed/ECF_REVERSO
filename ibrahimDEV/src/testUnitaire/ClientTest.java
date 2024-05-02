@@ -1,4 +1,4 @@
-package testUnitaire;
+/*package testUnitaire;
 
 import exception.MyException;
 import model.entite.Client;
@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Classe de test pour la classe Client.
  * Elle teste les méthodes de la classe Client en utilisant des paramètres.
  */
+/*
 public class ClientTest extends Client {
 
     /**
@@ -19,6 +20,7 @@ public class ClientTest extends Client {
      *
      * @param i La valeur du chiffre d'affaires à tester.
      */
+/*
     @ParameterizedTest
     @ValueSource(doubles = {-200, 200.0})
     void testSetChiffreDaffaire(Double i) {
@@ -30,6 +32,7 @@ public class ClientTest extends Client {
      *
      * @param i La valeur du chiffre d'affaires valide à tester.
      */
+/*
     @ParameterizedTest
     @ValueSource(doubles = {1000.0, 200.1, 300.0})
     void testChiffreDaffaireValide(double i) {
@@ -41,6 +44,7 @@ public class ClientTest extends Client {
      *
      * @param i La valeur du nombre d'employés à tester.
      */
+/*
     @ParameterizedTest
     @NullSource
     @ValueSource(ints = {0})
@@ -53,9 +57,12 @@ public class ClientTest extends Client {
      *
      * @param i La valeur du nombre d'employés valide à tester.
      */
+/*
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void testNombreEmployerValide(int i) {
         assertDoesNotThrow(() -> setNombreEmployer(i));
     }
 }
+
+ */

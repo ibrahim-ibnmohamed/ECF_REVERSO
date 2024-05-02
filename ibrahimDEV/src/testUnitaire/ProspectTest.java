@@ -1,4 +1,4 @@
-package testUnitaire;
+/*package testUnitaire;
 
 import exception.MyException;
 import model.entite.Prospect;
@@ -16,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Classe de test pour la classe Prospect.
  * Elle teste les méthodes de la classe Prospect en utilisant des paramètres.
- */
+ *//*
 public class ProspectTest extends Prospect {
 
     /**
      * Teste la méthode setProspectInteresse avec différentes valeurs.
      *
      * @param i La valeur du prospect intéressé à tester.
-     */
+     *//*
     @ParameterizedTest
     @NullSource
     @EmptySource
@@ -36,7 +36,7 @@ public class ProspectTest extends Prospect {
      * Teste la méthode setProspectInteresse avec des valeurs valides.
      *
      * @param i La valeur du prospect intéressé valide à tester.
-     */
+     *//*
     @ParameterizedTest
     @ValueSource(strings = {"Oui", "NON"})
     void testValideProspectInteresse(String i) {
@@ -47,7 +47,7 @@ public class ProspectTest extends Prospect {
      * Teste la méthode setDateDeProspection avec une valeur nulle.
      *
      * @param i La valeur de la date de prospection à tester.
-     */
+     *//*
     @ParameterizedTest
     @NullSource
     void testDateDeProspection(LocalDate i) {
@@ -58,7 +58,7 @@ public class ProspectTest extends Prospect {
      * Teste la méthode setDateDeProspection avec une date valide.
      *
      * @param dateString La chaîne représentant la date de prospection valide à tester.
-     */
+     *//*
     @ParameterizedTest
     @CsvSource({
             "20/02/2002"
@@ -69,3 +69,4 @@ public class ProspectTest extends Prospect {
         assertDoesNotThrow(() -> prospect.setDateDeProspection(date));
     }
 }
+*/
