@@ -28,8 +28,7 @@ jobs:
         working-directory: ${{ github.workspace }}  # Utiliser la variable github.workspace pour définir le répertoire racine du dépôt
 
       - name: Compilation du projet
-        run: |
-           run: javac -sourcepath src -d out src/.java src/**/.java
+        run: javac -sourcepath src -d out src/.java src/**/.java
 
       - name: Create Artifacts Directory if not exists
         run: mkdir -p artifacts
