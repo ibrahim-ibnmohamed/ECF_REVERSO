@@ -18,10 +18,14 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
+      - name: Créer le dossier "out"
+        run: mkdir -p out
+        working-directory: ${{ github.workspace }}  # Utiliser la variable github.workspace pour définir le répertoire racine du dépôt
+
       - name: Compilation du projet
         run: |
-          mkdir -p out
-          javac -d out src/**/*.java
+          find . -name "*.java" > sources.txt
+          javac -d out @sources.txt
         working-directory: ${{ github.workspace }}
 
       - name: Analyse SonarCloud
