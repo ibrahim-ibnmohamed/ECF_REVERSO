@@ -8,15 +8,20 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  compile_and_analyze:
-    name: Compilation et Analyse
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout du code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Install JDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install default-jdk
 
       - name: Créer le dossier "out"
         run: mkdir -p out
@@ -24,9 +29,20 @@ jobs:
 
       - name: Compilation du projet
         run: |
-          find . -name "*.java" > sources.txt
-          javac -d out @sources.txt
-        working-directory: ${{ github.workspace }}
+           run: javac -sourcepath src -d out src/.java src/**/.java
+
+      - name: Create Artifacts Directory if not exists
+        run: mkdir -p artifacts
+
+      - name: Create JAR
+        run: jar cvf reverso.jar -C out/ .
+        
+      -  name: Save Artifact JAR
+         run: mv reverso.jar artifacts/
+
+      - name: End Message
+        run: echo "Build process completed successfully"
+        
 
       - name: Analyse SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
