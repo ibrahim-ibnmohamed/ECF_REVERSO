@@ -24,7 +24,7 @@ jobs:
           sudo apt-get install default-jdk
 
       - name: Compilation du projet
-        run: javac -sourcepath src -d out src/.java src/**/.java
+        run: javac -sourcepath src -d out src/**/*.java
 
       - name: Create Artifacts Directory if not exists
         run: mkdir -p artifacts
