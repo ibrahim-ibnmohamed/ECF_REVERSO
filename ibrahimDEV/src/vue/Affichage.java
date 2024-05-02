@@ -4,15 +4,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import controleur.ControleurAffichage;
 import exception.DaoException;
-import model.entite.Client;
-import model.entite.Prospect;
+import entite.Client;
+import entite.Prospect;
 import utilitaires.MyLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.logging.Level;
 
 

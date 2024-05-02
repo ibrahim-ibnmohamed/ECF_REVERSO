@@ -1,15 +1,11 @@
 package controleur;
 
-import exception.DaoException;
-import exception.MyException;
-import model.dao.DaoClient;
-import model.dao.DaoProspect;
-import model.entite.Client;
-import model.entite.Prospect;
+import dao.DaoClient;
+import dao.DaoProspect;
+import entite.Client;
+import entite.Prospect;
 import vue.Affichage;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**

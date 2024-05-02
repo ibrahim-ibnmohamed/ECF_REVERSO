@@ -3,10 +3,10 @@ package controleur;
 import exception.ControleurExcpetion;
 import exception.DaoException;
 import exception.MyException;
-import model.dao.DaoClient;
-import model.dao.DaoProspect;
-import model.entite.Client;
-import model.entite.Prospect;
+import dao.DaoClient;
+import dao.DaoProspect;
+import entite.Client;
+import entite.Prospect;
 import vue.Formulair;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package model.entite;
+package entite;
 
 import exception.MyException;
 

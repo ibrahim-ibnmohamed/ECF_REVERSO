@@ -1,7 +1,7 @@
 /*package testUnitaire;
 
 import exception.MyException;
-import model.entite.Client;
+import entite.Client;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;

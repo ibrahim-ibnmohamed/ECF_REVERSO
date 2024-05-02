@@ -1,8 +1,8 @@
-package model.dao;
+package dao;
 
 import exception.DaoException;
 import exception.MyException;
-import model.entite.Client;
+import entite.Client;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;

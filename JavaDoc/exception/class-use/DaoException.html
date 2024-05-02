@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Les contrôleurs des vues de ce package sont responsables de la gestion des interactions
  entre les vues de l'application et les autres composants, tels que les modèles et les services.</div>
 </div>
-<div class="col-first even-row-color"><a href="#model.dao">model.dao</a></div>
+<div class="col-first even-row-color"><a href="#dao">dao</a></div>
 <div class="col-last even-row-color">
 <div class="block">Les DAOs (Data Access Objects) de ce package sont responsables de la communication
  avec la base de données pour lire, écrire, mettre à jour et supprimer les données
@@ -127,10 +127,10 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prospectInteresse)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">ControleurFormulaire.</span><code><a href="../../controleur/ControleurFormulaire.html#deleteClient(model.entite.Client)" class="member-name-link">deleteClient</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;clientVise)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">ControleurFormulaire.</span><code><a href="../../controleur/ControleurFormulaire.html#deleteClient(entite.Client)" class="member-name-link">deleteClient</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;clientVise)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">ControleurFormulaire.</span><code><a href="../../controleur/ControleurFormulaire.html#deleteProspect(model.entite.Prospect)" class="member-name-link">deleteProspect</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospectVise)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ControleurFormulaire.</span><code><a href="../../controleur/ControleurFormulaire.html#deleteProspect(entite.Prospect)" class="member-name-link">deleteProspect</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospectVise)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a><wbr>&lt;<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&gt;</code></div>
 <div class="col-second odd-row-color"><span class="type-name-label">ControleurAffichage.</span><code><a href="../../controleur/ControleurAffichage.html#findAllClient()" class="member-name-link">findAllClient</a>()</code></div>
@@ -187,20 +187,20 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="model.dao">
-<h2>Uses of <a href="../DaoException.html" title="class in exception">DaoException</a> in <a href="../../model/dao/package-summary.html">model.dao</a></h2>
-<div class="caption"><span>Methods in <a href="../../model/dao/package-summary.html">model.dao</a> that throw <a href="../DaoException.html" title="class in exception">DaoException</a></span></div>
+<section class="detail" id="dao">
+<h2>Uses of <a href="../DaoException.html" title="class in exception">DaoException</a> in <a href="../../model/dao/package-summary.html">dao</a></h2>
+<div class="caption"><span>Methods in <a href="../../model/dao/package-summary.html">dao</a> that throw <a href="../DaoException.html" title="class in exception">DaoException</a></span></div>
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">DaoClient.</span><code><a href="../../model/dao/DaoClient.html#create(model.entite.Client)" class="member-name-link">create</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;client)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">DaoClient.</span><code><a href="../../model/dao/DaoClient.html#create(entite.Client)" class="member-name-link">create</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;client)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Méthode pour créer un nouveau client dans la base de données.</div>
 </div>
 <div class="col-first odd-row-color"><code>static void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">DaoProspect.</span><code><a href="../../model/dao/DaoProspect.html#create(model.entite.Prospect)" class="member-name-link">create</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospect)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">DaoProspect.</span><code><a href="../../model/dao/DaoProspect.html#create(entite.Prospect)" class="member-name-link">create</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospect)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Crée un nouveau prospect dans la base de données.</div>
 </div>
@@ -235,12 +235,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Récupère un prospect par son nom.</div>
 </div>
 <div class="col-first even-row-color"><code>static void</code></div>
-<div class="col-second even-row-color"><span class="type-name-label">DaoClient.</span><code><a href="../../model/dao/DaoClient.html#update(model.entite.Client)" class="member-name-link">update</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;client)</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">DaoClient.</span><code><a href="../../model/dao/DaoClient.html#update(entite.Client)" class="member-name-link">update</a><wbr>(<a href="../../model/entite/Client.html" title="class in model.entite">Client</a>&nbsp;client)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Méthode pour mettre à jour les informations d'un client dans la base de données.</div>
 </div>
 <div class="col-first odd-row-color"><code>static void</code></div>
-<div class="col-second odd-row-color"><span class="type-name-label">DaoProspect.</span><code><a href="../../model/dao/DaoProspect.html#update(model.entite.Prospect)" class="member-name-link">update</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospect)</code></div>
+<div class="col-second odd-row-color"><span class="type-name-label">DaoProspect.</span><code><a href="../../model/dao/DaoProspect.html#update(entite.Prospect)" class="member-name-link">update</a><wbr>(<a href="../../model/entite/Prospect.html" title="class in model.entite">Prospect</a>&nbsp;prospect)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Met à jour les informations d'un prospect dans la base de données.</div>
 </div>

@@ -2,8 +2,8 @@ package vue;
 
 import controleur.ControleurAccueil;
 import exception.DaoException;
-import model.entite.Client;
-import model.entite.Prospect;
+import entite.Client;
+import entite.Prospect;
 import utilitaires.MyLogger;
 
 import javax.swing.*;

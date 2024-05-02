@@ -16,4 +16,4 @@
  * d'accès aux données de la logique métier de l'application. Cela permet une meilleure
  * maintenabilité, évolutivité et testabilité de l'application dans son ensemble.
  */
-package model.dao;
+package dao;

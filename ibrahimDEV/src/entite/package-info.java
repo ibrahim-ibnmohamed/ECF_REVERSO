@@ -13,4 +13,4 @@
  * Les entités sont généralement des objets immuables et peuvent être associées à des règles
  * de validation pour garantir l'intégrité des données lors de leur manipulation.
  */
-package model.entite;
+package entite;

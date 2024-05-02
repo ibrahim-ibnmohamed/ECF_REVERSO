@@ -4,7 +4,7 @@
  * Les classes dans ce package sont utilisées pour encapsuler les données et comportements associés
  * à chaque entité spécifique.
  */
-package model.entite;
+package entite;
 
 import exception.MyException;
 

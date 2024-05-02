@@ -1,4 +1,4 @@
-package model.dao;
+package dao;
 
 import utilitaires.MyLogger;
 

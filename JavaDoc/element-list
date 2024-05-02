@@ -1,7 +1,7 @@
 application
 controleur
 exception
-model.dao
+dao
 model.entite
 testUnitaire
 utilitaires
