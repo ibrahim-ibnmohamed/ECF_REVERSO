@@ -1,41 +1,47 @@
-name: Build
+name: Build and Analyze
+
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Install JDK
         run: |
           sudo apt-get update
           sudo apt-get install default-jdk
+
+      - name: Créer le dossier "out"
+        run: mkdir -p out
+        working-directory: ${{ github.workspace }}  # Utiliser la variable github.workspace pour définir le répertoire racine du dépôt
+
       - name: Compilation du projet
         run: javac -sourcepath ibrahimDEV/src -d out ibrahimDEV/src/**/*.java
 
-
       - name: Create Artifacts Directory if not exists
         run: mkdir -p artifacts
+
       - name: Create JAR
         run: jar cvf reverso.jar -C out/ .
+        
+      - name: Save Artifact JAR
+        run: mv reverso.jar artifacts/
 
-      -  name: Save Artifact JAR
-         run: mv reverso.jar artifacts/
       - name: End Message
         run: echo "Build process completed successfully"
-
-      - name: Check directory content
-        run: ls
-        working-directory: ${{ github.workspace }}
-
+        
 
       - name: Analyse SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
